@@ -1,0 +1,28 @@
+{
+  "modal": {
+    "hide": "Зыкрыть"
+  },
+  "header": {
+    "balance": "Баланс: {{count}} PetCoins",
+    "buy_tokens": "Купить PetCoins"
+  },
+  "inventory": "Мой питомник",
+  "shop": "Магазин",
+  "ref_program": "Реферальная программа",
+  "connection_with_wallet": "Подключить кошелек",
+  "bought_amount": "Потрачено",
+  "user_current_percent": "Текущий процент",
+  "completeCountdownText": "Вы не будете получать профит, пока не покормите питомцев",
+  "homepage": {
+    "timer": "До следующего кормления",
+    "finish_cycle_button": "Кормить",
+    "user_current_profit": "Текущий профит"
+  },
+  "miniCard": {
+    "price": "{{price}} PetCoins"
+  },
+  "language": {
+    "en": "EN",
+    "ru": "РУ"
+  }
+}

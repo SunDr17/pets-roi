@@ -1,0 +1,28 @@
+{
+  "modal": {
+    "hide": "Hide Modal"
+  },
+  "header": {
+    "balance": "Balance: {{count}} PetCoins",
+    "buy_tokens": "Buy PetCoins"
+  },
+  "inventory": "My pets",
+  "shop": "Shop",
+  "ref_program": "Reference program",
+  "connection_with_wallet": "Connect wallet",
+  "bought_amount": "Spent",
+  "user_current_percent": "Current profit percent",
+  "completeCountdownText": "You won't get a profit until you feed the pets",
+  "homepage": {
+    "timer": "Until next feed",
+    "finish_cycle_button": "Feed",
+    "user_current_profit": "Current profit"
+  },
+  "miniCard": {
+    "price": "{{price}} PetCoins"
+  },
+  "language": {
+    "en": "EN",
+    "ru": "RU"
+  }
+}
