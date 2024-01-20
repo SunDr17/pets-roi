@@ -4,8 +4,9 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
+import ConnectWallet from '../web3/Wallet';
+
 import styles from './Header.module.css';
-import { Button } from 'react-bootstrap';
 
 export default function Header() {
   const { t } = useTranslation();
@@ -35,7 +36,7 @@ export default function Header() {
             </NavDropdown>
           </Nav>
           <Nav>
-            <Button />
+            <ConnectWallet />
           </Nav>
         </Navbar.Collapse>
       </Container>

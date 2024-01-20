@@ -9,7 +9,6 @@
   "inventory": "Мой питомник",
   "shop": "Магазин",
   "ref_program": "Реферальная программа",
-  "connection_with_wallet": "Подключить кошелек",
   "bought_amount": "Потрачено",
   "user_current_percent": "Текущий процент",
   "completeCountdownText": "Вы не будете получать профит, пока не покормите питомцев",
@@ -24,5 +23,9 @@
   "language": {
     "en": "EN",
     "ru": "РУ"
+  },
+  "wallet": {
+    "connect": "Connect wallet",
+    "disconnect": "Disconnect"
   }
 }
