@@ -6,9 +6,10 @@
     "balance": "Balance: {{count}} PetCoins",
     "buy_tokens": "Buy PetCoins"
   },
+  "currency": "PetCoins",
   "inventory": "My pets",
   "shop": "Shop",
-  "ref_program": "Reference program",
+  "ref_program": "Referal program",
   "connection_with_wallet": "Connect wallet",
   "bought_amount": "Spent",
   "user_current_percent": "Current profit percent",
@@ -24,5 +25,22 @@
   "language": {
     "en": "EN",
     "ru": "RU"
+  },
+  "not_found": {
+    "header": "Ooops, sorry! Page Not found",
+    "content": "Please buy some Pets"
+  },
+  "fullCard": {
+    "form": {
+      "name": "Name",
+      "price": "Price",
+      "color": "Color",
+      "gender": {
+        "label": "Gender",
+        "male": "Male",
+        "female": "female"
+      },
+      "buy": "Buy"
+    }
   }
 }

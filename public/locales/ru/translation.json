@@ -10,6 +10,7 @@
   "shop": "Магазин",
   "ref_program": "Реферальная программа",
   "connection_with_wallet": "Подключить кошелек",
+  "currency": "PetCoins",
   "bought_amount": "Потрачено",
   "user_current_percent": "Текущий процент",
   "completeCountdownText": "Вы не будете получать профит, пока не покормите питомцев",
@@ -24,5 +25,22 @@
   "language": {
     "en": "EN",
     "ru": "РУ"
+  },
+  "not_found": {
+    "header": "Ууупс! Данной страницы не существует.",
+    "content": "Пожалуйста, купите новое животное"
+  },
+  "fullCard": {
+    "form": {
+      "name": "Имя",
+      "price": "Цена",
+      "color": "Цвет",
+      "gender": {
+        "label": "Пол",
+        "male": "Мальчик",
+        "female": "Девочка"
+      },
+      "buy": "Купить"
+    }
   }
 }
