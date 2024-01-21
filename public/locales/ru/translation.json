@@ -9,7 +9,6 @@
   "inventory": "Мой питомник",
   "shop": "Магазин",
   "ref_program": "Реферальная программа",
-  "connection_with_wallet": "Подключить кошелек",
   "currency": "PetCoins",
   "bought_amount": "Потрачено",
   "user_current_percent": "Текущий процент",
@@ -25,6 +24,10 @@
   "language": {
     "en": "EN",
     "ru": "РУ"
+  },
+  "wallet": {
+    "connect": "Подключить кошелек",
+    "disconnect": "Отключить"
   },
   "not_found": {
     "header": "Ууупс! Данной страницы не существует.",

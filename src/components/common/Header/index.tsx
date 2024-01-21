@@ -3,8 +3,8 @@ import { useTranslation } from 'react-i18next';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { Button } from 'react-bootstrap';
 
+import ConnectWallet from '@/components/common/web3/Wallet';
 import LanguageSelector from '@/components/common/LanguageSelector';
 
 import styles from './Header.module.css';
@@ -34,7 +34,7 @@ export default function Header() {
             </LinkContainer>
           </Nav>
           <Nav>
-            <Button />
+            <ConnectWallet />
           </Nav>
         </Navbar.Collapse>
         <Nav>

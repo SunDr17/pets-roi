@@ -10,7 +10,6 @@
   "inventory": "My pets",
   "shop": "Shop",
   "ref_program": "Referal program",
-  "connection_with_wallet": "Connect wallet",
   "bought_amount": "Spent",
   "user_current_percent": "Current profit percent",
   "completeCountdownText": "You won't get a profit until you feed the pets",
@@ -25,6 +24,10 @@
   "language": {
     "en": "EN",
     "ru": "RU"
+  },
+  "wallet": {
+    "connect": "Connect wallet",
+    "disconnect": "Disconnect"
   },
   "not_found": {
     "header": "Ooops, sorry! Page Not found",
