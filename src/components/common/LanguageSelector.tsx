@@ -13,9 +13,9 @@ export default function LanguageSelector() {
   };
 
   return (
-    <Form.Select onChange={(event) => changeLanguageSelect(event)}>
+    <Form.Select defaultValue={i18n.language.split('-')[0]} onChange={(e) => changeLanguageSelect(e)}>
       {languages.map((lang) => (
-        <option key={lang} value={lang} selected={i18n.language === lang}>
+        <option key={lang} value={lang}>
           {t(`language.${lang}`)}
         </option>
       ))}

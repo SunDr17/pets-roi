@@ -1,3 +1,12 @@
 .logo {
-  height: 35px;
+  cursor: pointer;
+  height: 40px;
+}
+
+.userBalance {
+  font-size: smaller;
+}
+
+.menu {
+  font-size: larger;
 }

@@ -56,7 +56,7 @@ export default function FullCard() {
                 />
               </Col>
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" className="mb-4">
               {t('fullCard.form.buy')}
             </Button>
           </Form>

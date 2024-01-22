@@ -1,6 +1,7 @@
 {
-  "modal": {
-    "hide": "Зыкрыть"
+  "modal_default": {
+    "hide": "Зыкрыть",
+    "confirm": "Подтвердить"
   },
   "header": {
     "balance": "Баланс: {{count}} PetCoins",
@@ -45,5 +46,10 @@
       },
       "buy": "Купить"
     }
+  },
+  "finish_cycle_modal": {
+    "header": "Вы уверены?",
+    "body": "После кормления PetCoins поступят на ваш Баланс",
+    "confirm": "Кормить"
   }
 }
