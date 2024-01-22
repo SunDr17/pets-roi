@@ -1,13 +1,12 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 import Container from 'react-bootstrap/Container';
 import { Col, Row } from 'react-bootstrap';
 
 import { getData } from '@/services/data/getData';
 import ItemsGrid from '@/components/common/ItemsGrid';
+import TokenomicInfo from '@/components/pages/Home/TokenomicInfo';
 
 export default function Home() {
-  const { t } = useTranslation();
   const boughtItems = getData();
 
   // TODO: remove mock data
@@ -15,7 +14,7 @@ export default function Home() {
     <Container>
       <Row>
         <Col sm="4">
-          <div>{t('bought_amount')}: 1000000 PetCoins</div>
+          <TokenomicInfo />
         </Col>
         <Col>
           <ItemsGrid items={boughtItems[0]} />

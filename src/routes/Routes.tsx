@@ -1,20 +1,24 @@
-import React from 'react';
+import { lazy, Suspense } from 'react';
 import { Routes as ReactRoutes, Route } from 'react-router-dom';
 
-import Home from '@/components/pages/Home';
-import Shop from '@/components/pages/Shop';
-import ReferalProgram from '@/components/pages/ReferalProgram';
-import NotFound from '@/components/pages/NotFound';
-import FullCard from '@/components/pages/FullCard';
+import Spinner from '@/components/common/Spinner';
+
+const Home = lazy(() => import('@/components/pages/Home'));
+const Shop = lazy(() => import('@/components/pages/Shop'));
+const ReferalProgram = lazy(() => import('@/components/pages/ReferalProgram'));
+const NotFound = lazy(() => import('@/components/pages/NotFound'));
+const FullCard = lazy(() => import('@/components/pages/FullCard'));
 
 export default function Routes() {
   return (
-    <ReactRoutes>
-      <Route index element={<Home />}/>
-      <Route path="shop" element={<Shop />} />
-      <Route path="shop/item/:id/edit" element={<FullCard />} />
-      <Route path="ref_program" element={<ReferalProgram />}/>
-      <Route path="*" element={<NotFound />} />
-    </ReactRoutes>
+    <Suspense fallback={<Spinner />}>
+      <ReactRoutes>
+        <Route index element={<Home />}/>
+        <Route path="shop" element={<Shop />} />
+        <Route path="shop/item/:id/edit" element={<FullCard />} />
+        <Route path="ref_program" element={<ReferalProgram />}/>
+        <Route path="*" element={<NotFound />} />
+      </ReactRoutes>
+    </Suspense>
   );
 }

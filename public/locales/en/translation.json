@@ -1,6 +1,7 @@
 {
-  "modal": {
-    "hide": "Hide Modal"
+  "modal_default": {
+    "hide": "Hide Modal",
+    "confirm": "Confirm"
   },
   "header": {
     "balance": "Balance: {{count}} PetCoins",
@@ -41,9 +42,14 @@
       "gender": {
         "label": "Gender",
         "male": "Male",
-        "female": "female"
+        "female": "Female"
       },
       "buy": "Buy"
     }
+  },
+  "finish_cycle_modal": {
+    "header": "Are you sure?",
+    "body": "After feeding PetCoins will be added to your current balance",
+    "confirm": "Feed"
   }
 }
