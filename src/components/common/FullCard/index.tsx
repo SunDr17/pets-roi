@@ -7,23 +7,54 @@ import Image from 'react-bootstrap/Image';
 import { Item } from '@/types/ItemType';
 import { isSvg } from '@/utils/image';
 import FilledSvg from '@/components/common/FilledSvg';
+import useBuyItem from './hooks/useBuyItem';
 
 function FullCard({ item }: { item: Item }) {
   const { t } = useTranslation();
+  const [error, setError] = useState('');
+  const [name, setName] = useState('');
+  const [gender, setGender] = useState('');
   const [color, setColor] = useState(item.color || item.defaultColor);
+
   const isItemImageSvg = isSvg(item.imageSrc);
+  const buyItem = useBuyItem();
+
+  const onFormSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    const saveItem: Item = {
+      ...item,
+      fullName: name,
+      gender,
+      color,
+    }
+
+    try {
+      buyItem(saveItem);
+    } catch (error: any) {
+      if (error.message === 'insufficient_balance') {
+        setError(t('fullCard.error.insufficient_balance'));
+      } else {
+        setError(error.message);
+      }
+    }
+  }
 
   return (
     <Container>
       <Row>
         <Col xs="12" sm="6" md="6" lg="4">
-          <Form className="m-auto w-auto">
+          <Form className="m-auto w-auto" onSubmit={onFormSubmit}>
             <Form.Group as={Row} className="mb-3" controlId="itemName">
               <Form.Label column sm="3">
                 {t('fullCard.form.name')}
               </Form.Label>
               <Col sm="9">
-                <Form.Control required plaintext placeholder={t('fullCard.form.name')} />
+                <Form.Control
+                  required
+                  plaintext
+                  placeholder={t('fullCard.form.name')}
+                  onChange={(e) => setName(e.target.value)}
+                />
               </Col>
             </Form.Group>
             <Form.Group as={Row} className="mb-3" controlId="itemGender">
@@ -31,7 +62,7 @@ function FullCard({ item }: { item: Item }) {
                 {t('fullCard.form.gender.label')}
               </Form.Label>
               <Col sm="9">
-                <Form.Select className="w-auto">
+                <Form.Select className="w-auto" onChange={(e) => setGender(e.target.value)}>
                   <option value="male">{t('fullCard.form.gender.male')}</option>
                   <option value="female">{t('fullCard.form.gender.female')}</option>
                 </Form.Select>
@@ -62,6 +93,7 @@ function FullCard({ item }: { item: Item }) {
             <Button variant="primary" type="submit" className="mb-4">
               {t('fullCard.form.buy')}
             </Button>
+            {error && <div className="text-danger mb-4">{error}</div>}
           </Form>
         </Col>
         <Col xs="12" sm="6" md="6" lg="4" className="ml-5">

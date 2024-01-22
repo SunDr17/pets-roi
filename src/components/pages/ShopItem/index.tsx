@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { getItemById } from '@/services/data/getData';
+import { getItemById } from '@/services/data/items';
 import NotFound from '@/components/pages/NotFound';
 import FullCard from '@/components/common/FullCard';
 

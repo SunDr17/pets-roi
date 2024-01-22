@@ -13,8 +13,8 @@ import styles from './MiniCard.module.css';
 export default function MiniCard({ item }: { item: Item }) {
   const { t } = useTranslation();
 
-  return (
-    <LinkContainer to={`/shop/item/${item.id}/edit`}>
+  function renderCard() {
+    return (
       <Card bsPrefix={cn(styles['card-flyer'], 'text-center flex-fill card')}>
         <div className="image-box pt-2">
           {isSvg(item.imageSrc)
@@ -34,12 +34,18 @@ export default function MiniCard({ item }: { item: Item }) {
           }
         </div>
         <Card.Body>
-          <Card.Title>{item.name}</Card.Title>
+          <Card.Title>{item.fullName ?? item.name}</Card.Title>
           <Card.Text>
             {t('miniCard.price', { price: item.price })}
           </Card.Text>
         </Card.Body>
       </Card>
+    );
+  }
+
+  return !item.fullName ? (
+    <LinkContainer className={styles['cursor-pointer']} to={`/shop/item/${item.id}`}>
+      {renderCard()}
     </LinkContainer>
-  );
+  ) : renderCard();
 }

@@ -17,7 +17,14 @@
   "homepage": {
     "timer": "До следующего кормления",
     "finish_cycle_button": "Кормить",
-    "user_current_profit": "Текущий профит"
+    "user_current_profit": "Текущий профит",
+    "grid": {
+      "empty": {
+        "header": "У вас еще нет покупок",
+        "body": "Купите себе любимца",
+        "button": "В магазин"
+      }
+    }
   },
   "miniCard": {
     "price": "{{price}} PetCoins"
@@ -45,11 +52,17 @@
         "female": "Девочка"
       },
       "buy": "Купить"
+    },
+    "error": {
+      "insufficient_balance": "У вас недостаточно PetCoin'ов на балансе"
     }
   },
   "finish_cycle_modal": {
     "header": "Вы уверены?",
     "body": "После кормления PetCoins поступят на ваш Баланс",
     "confirm": "Кормить"
+  },
+  "grid": {
+    "empty": "Ничего не найдено."
   }
 }

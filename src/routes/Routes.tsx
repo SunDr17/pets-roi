@@ -15,7 +15,7 @@ export default function Routes() {
       <ReactRoutes>
         <Route index element={<Home />}/>
         <Route path="shop" element={<Shop />} />
-        <Route path="shop/item/:id/edit" element={<ShopItem />} />
+        <Route path="shop/item/:id" element={<ShopItem />} />
         <Route path="ref_program" element={<ReferalProgram />}/>
         <Route path="*" element={<NotFound />} />
       </ReactRoutes>

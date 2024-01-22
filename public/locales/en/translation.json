@@ -17,7 +17,14 @@
   "homepage": {
     "timer": "Until next feed",
     "finish_cycle_button": "Feed",
-    "user_current_profit": "Current profit"
+    "user_current_profit": "Current profit",
+    "grid": {
+      "empty": {
+        "header": "You have not bought anything yet",
+        "body": "Buy your buddy",
+        "button": "Go to Shop"
+      }
+    }
   },
   "miniCard": {
     "price": "{{price}} PetCoins"
@@ -45,11 +52,17 @@
         "female": "Female"
       },
       "buy": "Buy"
+    },
+    "error": {
+      "insufficient_balance": "You have no enough PetCoins"
     }
   },
   "finish_cycle_modal": {
     "header": "Are you sure?",
     "body": "After feeding PetCoins will be added to your current balance",
     "confirm": "Feed"
+  },
+  "grid": {
+    "empty": "Nothing to show"
   }
 }

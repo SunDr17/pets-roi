@@ -50,14 +50,14 @@ export default function TokenomicInfo() {
         <p>
           {t('user_current_percent')}: {config.basicProfitPercent}%
         </p>
-        <p>
+        {boughtAmount > 0 && <p>
           {t('homepage.user_current_profit')}: {currentProfit.toFixed(4)} {t('currency')}
-        </p>
-        <p>
+        </p>}
+        {boughtAmount > 0 && <p>
           {t('homepage.timer')}:{' '}
           {<Countdown timer={nextCycleTimer} completeText={t('completeCountdownText')} />}
-        </p>
-        <FinishCycleModalButton onFinishCycle={onFinishCycleButtonClick} />
+        </p>}
+        {boughtAmount > 0 && <FinishCycleModalButton onFinishCycle={onFinishCycleButtonClick} />}
       </Container>
     </>
   );

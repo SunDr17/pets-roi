@@ -10,7 +10,7 @@ export function getCurrentBalance(key: string = CURRENT_BALANCE_KEY) {
   let balance = Number(localStorage.getItem(key));
 
   // TODO: temp solution, mock balance
-  if (!balance) {
+  if (!balance && key === CURRENT_BALANCE_KEY) {
     balance = 100000;
     setCurrentBalance(balance, key);
   }
@@ -24,7 +24,7 @@ export function setCurrentBalance(balance: number, key: string = CURRENT_BALANCE
 
 // work in both sides: if pass profit < 0 it will decrease balance
 export function addProfitToBalance(profit: number, key: string = CURRENT_BALANCE_KEY) {
-  setCurrentBalance(getCurrentBalance(key) + profit);
+  setCurrentBalance(getCurrentBalance(key) + profit, key);
 }
 
 export function getCycleStartTime() {
