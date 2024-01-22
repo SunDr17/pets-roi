@@ -45,6 +45,40 @@ export function setCycleStartTime(cycleStartTime: number | string | Date) {
   localStorage.setItem('cycleStartTime', JSON.stringify(cycleStartTime));
 }
 
+export function getCurrentProfitPercent() {
+  const currentWorkingBalance = getCurrentBalance(WORKING_BALANCE_KEY);
+
+  if (currentWorkingBalance === 0) {
+    return 0;
+  }
+
+  const boughtValues = Object.keys(config.percentsForBoughtBalance).map(key => Number(key));
+  const minBoughtBalance = Math.min(...boughtValues);
+  const maxBoughtBalance = Math.max(...boughtValues);
+
+  if (currentWorkingBalance < minBoughtBalance) {
+    return config.percentsForBoughtBalance[minBoughtBalance];
+  }
+
+  if (currentWorkingBalance >= maxBoughtBalance) {
+    return config.percentsForBoughtBalance[maxBoughtBalance];
+  }
+
+  let result = null;
+  let previousValue = null;
+
+  for (const balance in config.percentsForBoughtBalance) {
+    if (currentWorkingBalance < Number(balance)) {
+      result = previousValue;
+      break;
+    }
+
+    previousValue = config.percentsForBoughtBalance[balance];
+  }
+
+  return result || 0;
+}
+
 export function calculateCurrentProfit() {
   // TODO: fix bug: when current balance changes, current profit calculate according new value
   // but profit should be calculated with old balance all time it was,
@@ -53,6 +87,6 @@ export function calculateCurrentProfit() {
   const cycleTimer = timerAfterPrevCycleStarted < config.cycleDuration
     ? timerAfterPrevCycleStarted
     : config.cycleDuration;
-  return cycleTimer * ((getCurrentBalance(WORKING_BALANCE_KEY) / 100 * config.basicProfitPercent)
+  return cycleTimer * ((getCurrentBalance(WORKING_BALANCE_KEY) / 100 * getCurrentProfitPercent())
     / config.cycleDuration);
 }

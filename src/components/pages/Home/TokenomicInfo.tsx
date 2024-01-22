@@ -10,6 +10,7 @@ import {
   addProfitToBalance,
   calculateCurrentProfit,
   getCurrentBalance,
+  getCurrentProfitPercent,
   getCycleStartTime,
   setCycleStartTime,
   WORKING_BALANCE_KEY,
@@ -48,7 +49,7 @@ export default function TokenomicInfo() {
           {t('bought_amount')}: {boughtAmount} {t('currency')}
         </p>
         <p>
-          {t('user_current_percent')}: {config.basicProfitPercent}%
+          {t('user_current_percent')}: {getCurrentProfitPercent()}%
         </p>
         {boughtAmount > 0 && <p>
           {t('homepage.user_current_profit')}: {currentProfit.toFixed(4)} {t('currency')}

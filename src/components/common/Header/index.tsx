@@ -28,7 +28,7 @@ export default function Header() {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className={styles.menu}>
-          <Nav className="me-auto">
+          <Nav className="m-auto">
             <LinkContainer to="/">
               <Nav.Link>{t('inventory')}</Nav.Link>
             </LinkContainer>
