@@ -13,7 +13,11 @@ export default function LanguageSelector() {
   };
 
   return (
-    <Form.Select defaultValue={i18n.language.split('-')[0]} onChange={(e) => changeLanguageSelect(e)}>
+    <Form.Select
+      className="w-auto"
+      defaultValue={i18n.language.split('-')[0]}
+      onChange={(e) => changeLanguageSelect(e)}
+    >
       {languages.map((lang) => (
         <option key={lang} value={lang}>
           {t(`language.${lang}`)}

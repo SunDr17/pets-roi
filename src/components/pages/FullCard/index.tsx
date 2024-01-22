@@ -16,40 +16,40 @@ export default function FullCard() {
   return item ? (
     <Container>
       <Row>
-        <Col sm="6">
-          <Form>
+        <Col xs="12" sm="6" md="6" lg="4">
+          <Form className="m-auto w-auto">
             <Form.Group as={Row} className="mb-3" controlId="itemName">
-              <Form.Label column sm="2">
+              <Form.Label column sm="3">
                 {t('fullCard.form.name')}
               </Form.Label>
-              <Col sm="10">
+              <Col sm="9">
                 <Form.Control required plaintext placeholder={t('fullCard.form.name')} />
               </Col>
             </Form.Group>
             <Form.Group as={Row} className="mb-3" controlId="itemGender">
-              <Form.Label column sm="2">
+              <Form.Label column sm="3">
                 {t('fullCard.form.gender.label')}
               </Form.Label>
-              <Col sm="10">
-                <Form.Select>
+              <Col sm="9">
+                <Form.Select className="w-auto">
                   <option value="male">{t('fullCard.form.gender.male')}</option>
                   <option value="female">{t('fullCard.form.gender.female')}</option>
                 </Form.Select>
               </Col>
             </Form.Group>
             <Form.Group as={Row} className="mb-3" controlId="itemPrice">
-              <Form.Label column sm="2">
+              <Form.Label column sm="3">
                 {t('fullCard.form.price')}
               </Form.Label>
-              <Col sm="10">
+              <Col sm="9">
                 <Form.Control plaintext readOnly defaultValue={`${item.price} ${t('currency')}`} />
               </Col>
             </Form.Group>
             <Form.Group as={Row} className="mb-3" controlId="itemColor">
-              <Form.Label column sm="2">
+              <Form.Label column sm="3">
                 {t('fullCard.form.color')}
               </Form.Label>
-              <Col sm="10">
+              <Col sm="9">
                 <Form.Control
                   type="color"
                   defaultValue="#563d7c"
@@ -61,7 +61,7 @@ export default function FullCard() {
             </Button>
           </Form>
         </Col>
-        <Col className="ml-5">
+        <Col xs="12" sm="6" md="6" lg="4" className="ml-5">
           {item.imageSrc && <Image src={item.imageSrc} fluid />}
         </Col>
       </Row>
