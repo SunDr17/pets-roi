@@ -7,7 +7,7 @@ const Home = lazy(() => import('@/components/pages/Home'));
 const Shop = lazy(() => import('@/components/pages/Shop'));
 const ReferalProgram = lazy(() => import('@/components/pages/ReferalProgram'));
 const NotFound = lazy(() => import('@/components/pages/NotFound'));
-const FullCard = lazy(() => import('@/components/pages/FullCard'));
+const ShopItem = lazy(() => import('@/components/pages/ShopItem'));
 
 export default function Routes() {
   return (
@@ -15,7 +15,7 @@ export default function Routes() {
       <ReactRoutes>
         <Route index element={<Home />}/>
         <Route path="shop" element={<Shop />} />
-        <Route path="shop/item/:id/edit" element={<FullCard />} />
+        <Route path="shop/item/:id/edit" element={<ShopItem />} />
         <Route path="ref_program" element={<ReferalProgram />}/>
         <Route path="*" element={<NotFound />} />
       </ReactRoutes>

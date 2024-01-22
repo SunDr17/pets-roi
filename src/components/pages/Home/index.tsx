@@ -17,7 +17,7 @@ export default function Home() {
           <TokenomicInfo />
         </Col>
         <Col>
-          <ItemsGrid items={boughtItems[0]} />
+          <ItemsGrid items={boughtItems[1]} />
         </Col>
       </Row>
     </Container>
