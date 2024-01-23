@@ -21,7 +21,6 @@ export default function MiniCard({ item }: { item: Item }) {
             ? <FilledSvg
               src={item.imageSrc}
               color={item.color || item.defaultColor}
-              height={100}
               width={100}
             />
             : <Card.Img
@@ -29,7 +28,6 @@ export default function MiniCard({ item }: { item: Item }) {
               variant="top"
               src={item.imageSrc}
               width={100}
-              height={100}
             />
           }
         </div>
