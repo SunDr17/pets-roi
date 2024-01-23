@@ -28,7 +28,9 @@ export default function Footer() {
           </Nav>
           <Nav>
             {Object.keys(config.socialLinks).map((social) => (
-              <Nav.Link href={config.socialLinks[social]} target="_blank"><Icon name={social} /></Nav.Link>
+              <Nav.Link key={social} href={config.socialLinks[social]} target="_blank">
+                <Icon name={social} />
+              </Nav.Link>
             ))}
           </Nav>
         </Container>

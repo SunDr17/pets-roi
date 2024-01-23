@@ -1,4 +1,4 @@
-export default {
+const config = {
   percentsForBoughtBalance: {
     50000: 2,
     60000: 2.1,
@@ -20,3 +20,5 @@ export default {
     whitepaper: 'https://ethereum.org/en/whitepaper',
   } as { [index: string]: string },
 };
+
+export default config;
