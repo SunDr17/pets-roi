@@ -13,4 +13,10 @@ export default {
     150000: 3,
   } as { [index: string]: number },
   cycleDuration: 24 * 60 * 60 * 1000,
+  socialLinks: {
+    'twitter-x': 'https://twitter.com/',
+    telegram: 'https://t.me/CrypTime_Channel',
+    github: 'https://github.com',
+    whitepaper: 'https://ethereum.org/en/whitepaper',
+  } as { [index: string]: string },
 };
