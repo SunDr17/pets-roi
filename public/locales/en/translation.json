@@ -5,11 +5,17 @@
   },
   "header": {
     "balance": "Balance: {{count}} PetCoins",
-    "buy_tokens": "Buy PetCoins"
+    "buy_tokens": "Buy PetCoins",
+    "shop": "Shop"
   },
   "currency": "PetCoins",
   "inventory": "My pets",
-  "shop": "Shop",
+  "shop": {
+    "tabs": {
+      "dogs": "Dogs",
+      "cats": "Cats"
+    }
+  },
   "ref_program": "Referal program",
   "bought_amount": "Spent",
   "user_current_percent": "Current profit percent",

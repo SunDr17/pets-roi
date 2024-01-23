@@ -5,10 +5,16 @@
   },
   "header": {
     "balance": "Баланс: {{count}} PetCoins",
-    "buy_tokens": "Купить PetCoins"
+    "buy_tokens": "Купить PetCoins",
+    "shop": "Магазин"
   },
   "inventory": "Мой питомник",
-  "shop": "Магазин",
+  "shop": {
+    "tabs": {
+      "dogs": "Собаки",
+      "cats": "Коты"
+    }
+  },
   "ref_program": "Реферальная программа",
   "currency": "PetCoins",
   "bought_amount": "Потрачено",

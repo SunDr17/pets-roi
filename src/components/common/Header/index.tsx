@@ -33,7 +33,7 @@ export default function Header() {
               <Nav.Link>{t('inventory')}</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/shop">
-              <Nav.Link>{t('shop')}</Nav.Link>
+              <Nav.Link>{t('header.shop')}</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/ref_program">
               <Nav.Link>{t('ref_program')}</Nav.Link>
