@@ -20,10 +20,13 @@ export default function Footer() {
               <Nav.Link>{t('inventory')}</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/shop">
-              <Nav.Link>{t('header.shop')}</Nav.Link>
+              <Nav.Link>{t('menu.shop')}</Nav.Link>
             </LinkContainer>
-            <LinkContainer to="/ref_program">
-              <Nav.Link>{t('ref_program')}</Nav.Link>
+            <LinkContainer to="/ref-program">
+              <Nav.Link>{t('menu.ref_program')}</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/tokenomics">
+              <Nav.Link>{t('menu.tokenomics')}</Nav.Link>
             </LinkContainer>
           </Nav>
           <Nav>

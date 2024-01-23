@@ -3,10 +3,12 @@
     "hide": "Зыкрыть",
     "confirm": "Подтвердить"
   },
-  "header": {
+  "menu": {
     "balance": "Баланс: {{count}} PetCoins",
     "buy_tokens": "Купить PetCoins",
-    "shop": "Магазин"
+    "shop": "Магазин",
+    "ref_program": "Реферальная программа",
+    "tokenomics": "Токеномика"
   },
   "inventory": "Мой питомник",
   "shop": {
@@ -15,7 +17,23 @@
       "cats": "Коты"
     }
   },
-  "ref_program": "Реферальная программа",
+  "ref_program": {
+    "header": "Реферальная программа",
+    "your_link": "Твоя ссылка",
+    "copy_button": "Копировать",
+    "copied_button": "Скопировано",
+    "referral_balance": {
+      "header": "Партнерская статистика",
+      "balance": "Баланс: {{count}} PetCoins"
+    }
+  },
+  "tokenomics": {
+    "header": "Токеномика",
+    "cycle_duration": "Длинна цикла {{duration}} часов",
+    "working_balance": "Количество потраченныйх PetCoin'ов",
+    "percent": "Процент прибыли",
+    "and_more": "и больше"
+  },
   "currency": "PetCoins",
   "bought_amount": "Потрачено",
   "user_current_percent": "Текущий процент",

@@ -3,10 +3,12 @@
     "hide": "Hide Modal",
     "confirm": "Confirm"
   },
-  "header": {
+  "menu": {
     "balance": "Balance: {{count}} PetCoins",
     "buy_tokens": "Buy PetCoins",
-    "shop": "Shop"
+    "shop": "Shop",
+    "ref_program": "Referral program",
+    "tokenomics": "Tokenomics"
   },
   "currency": "PetCoins",
   "inventory": "My pets",
@@ -16,7 +18,23 @@
       "cats": "Cats"
     }
   },
-  "ref_program": "Referal program",
+  "ref_program": {
+    "header": "Referral program",
+    "your_link": "Your link",
+    "copy_button": "Copy",
+    "copied_button": "Copied",
+    "referral_balance": {
+      "header": "Affiliate statistic",
+      "balance": "Balance: {{count}} PetCoins"
+    }
+  },
+  "tokenomics": {
+    "header": "Tokenomics",
+    "cycle_duration": "Cycle duration is {{duration}} hours",
+    "working_balance": "Spent PetCoins amount",
+    "percent": "Profit percent",
+    "and_more": "and more"
+  },
   "bought_amount": "Spent",
   "user_current_percent": "Current profit percent",
   "completeCountdownText": "You won't get a profit until you feed the pets",

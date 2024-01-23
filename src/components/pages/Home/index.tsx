@@ -14,7 +14,7 @@ export default function Home() {
   const boughtItems = getBoughtData();
 
   return (
-    <Container>
+    <Container fluid>
       <Row>
         <Col sm="4">
           <TokenomicInfo />

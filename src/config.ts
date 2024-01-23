@@ -1,6 +1,6 @@
 const config = {
   percentsForBoughtBalance: {
-    50000: 2,
+    0: 2,
     60000: 2.1,
     70000: 2.2,
     80000: 2.3,

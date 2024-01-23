@@ -23,7 +23,7 @@ export default function Header() {
             <img className={styles.logo} alt="PetsROI" src={process.env.PUBLIC_URL + '/images/logo.svg'} />
           </LinkContainer>
           <div className={styles.userBalance}>
-            {t('header.balance', { count: userCurrentBalance })}
+            {t('menu.balance', { count: userCurrentBalance })}
           </div>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -33,7 +33,7 @@ export default function Header() {
               <Nav.Link>{t('inventory')}</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/shop">
-              <Nav.Link>{t('header.shop')}</Nav.Link>
+              <Nav.Link>{t('menu.shop')}</Nav.Link>
             </LinkContainer>
           </Nav>
           <Nav>

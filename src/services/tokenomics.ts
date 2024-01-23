@@ -28,17 +28,7 @@ export function addProfitToBalance(profit: number, key: string = CURRENT_BALANCE
 }
 
 export function getCycleStartTime() {
-  let cycleStartTime = config.cycleDuration;
-  const startTime = Number(localStorage.getItem('cycleStartTime'));
-
-  // TODO: temp solution, setTimer in localStorage when buy item
-  if (!startTime) {
-    setCycleStartTime(new Date().getTime());
-  } else {
-    cycleStartTime = startTime;
-  }
-
-  return cycleStartTime;
+  return Number(localStorage.getItem('cycleStartTime'));
 }
 
 export function setCycleStartTime(cycleStartTime: number | string | Date) {
@@ -47,10 +37,6 @@ export function setCycleStartTime(cycleStartTime: number | string | Date) {
 
 export function getCurrentProfitPercent() {
   const currentWorkingBalance = getCurrentBalance(WORKING_BALANCE_KEY);
-
-  if (currentWorkingBalance === 0) {
-    return 0;
-  }
 
   const boughtValues = Object.keys(config.percentsForBoughtBalance).map(key => Number(key));
   const minBoughtBalance = Math.min(...boughtValues);
