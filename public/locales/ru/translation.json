@@ -36,10 +36,12 @@
   },
   "currency": "PetCoins",
   "currencies": {
-    "petCoins": "PetCoins",
-    "usdt": "USDT"
+    "primary_currency": "PetCoins",
+    "usdt": "USDT",
+    "bnb": "BNB"
   },
   "top_up": {
+    "exchange_rates_info": "Курс обмена: за 1 {{secondaryCurrency}} вы получите {{amount}} {{primaryCurrency}}",
     "message": "Вы получите {{amount}} PetCoin'ов",
     "submit_button": "Пополнить",
     "close_modal": "Отменить"

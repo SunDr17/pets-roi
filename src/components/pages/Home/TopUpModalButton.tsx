@@ -9,34 +9,34 @@ import { CURRENCIES } from '@/services/currencies';
 import TopUpForm from '@/components/common/TopUpForm';
 
 function TopUpModalButton() {
-    const { t } = useTranslation();
-    const dispatch = useAppDispatch();
+  const { t } = useTranslation();
+  const dispatch = useAppDispatch();
 
-    const onConfirm = () => {
-        dispatch(hideModal());
-    };
+  const onConfirm = () => {
+    dispatch(hideModal());
+  };
 
-    const openModal = () => {
-        dispatch(showModal({
-            onConfirm,
-            header: t('menu.buy_tokens'),
-            body: (
-                <TopUpForm
-                    firstCurrency={CURRENCIES.PETCOINS}
-                    secondCurrency={CURRENCIES.USDT}
-                />
-            ),
-            confirmText: t('top_up.close_modal'),
-        }));
-    };
+  const openModal = () => {
+    dispatch(showModal({
+      onConfirm,
+      header: t('menu.buy_tokens'),
+      body: (
+        <TopUpForm
+          primaryCurrency={CURRENCIES.PRIMARY_CURRENCY}
+          secondaryCurrency={CURRENCIES.BNB}
+        />
+      ),
+      confirmText: t('top_up.close_modal'),
+    }));
+  };
 
-    return (
-        <Nav.Item>
-            <Nav.Link onClick={openModal}>
-                {t('menu.buy_tokens')}
-            </Nav.Link>
-        </Nav.Item>
-    );
+  return (
+    <Nav.Item>
+      <Nav.Link onClick={openModal}>
+        {t('menu.buy_tokens')}
+      </Nav.Link>
+    </Nav.Item>
+  );
 }
 
 export default memo(TopUpModalButton);
