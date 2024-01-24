@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 import { getReferralLink, getReferralBalance } from '@/services/data/referral';
+import WithdrawButton from '@/components/common/web3/WithdrawButton';
 
 export default function ReferralProgram() {
   const { t } = useTranslation();
@@ -33,8 +34,12 @@ export default function ReferralProgram() {
         </Button>
       </div>
       <div>
-        <p>{t('ref_program.referral_balance.header')}</p>
+        <p className="display-6">{t('ref_program.referral_balance.header')}</p>
         <p>{t('ref_program.referral_balance.balance', { count: referralBalance })}</p>
+        <WithdrawButton withdrawSum={referralBalance} />
+        {/* TODO: remove it, test for secret vars in github */}
+        <p>{process.env.REACT_APP_WEB3_PROJECT_ID}</p>
+        <p>{process.env.REACT_APP_WEB3_WALLET_BASE_ADDRESS}</p>
       </div>
     </Container>
   );

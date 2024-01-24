@@ -4,6 +4,12 @@ import { bsc } from 'wagmi/chains';
 
 const projectId = process.env.REACT_APP_WEB3_PROJECT_ID || '';
 
+declare module 'wagmi' {
+  interface Register {
+    config: typeof wagmiConfig,
+  }
+}
+
 // TODO: fix bug when disconnecting site in MetaMask directly
 export const wagmiConfig = createConfig({
   chains: [bsc],

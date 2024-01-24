@@ -24,7 +24,19 @@
     "copied_button": "Скопировано",
     "referral_balance": {
       "header": "Партнерская статистика",
-      "balance": "Баланс: {{count}} PetCoins"
+      "balance": "Баланс: {{count}} PetCoins",
+      "withdraw_button": {
+        "withdraw": "Вывод средств",
+        "confirming": "Подтверждение...",
+        "error": {
+          "label": "Ошибка: {{error}}"
+        }
+      }
+    }
+  },
+  "web3": {
+    "error": {
+      "User rejected the request.": "Пользователь отклонил запрос"
     }
   },
   "tokenomics": {
