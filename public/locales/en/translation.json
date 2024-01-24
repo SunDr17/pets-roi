@@ -25,7 +25,19 @@
     "copied_button": "Copied",
     "referral_balance": {
       "header": "Affiliate statistic",
-      "balance": "Balance: {{count}} PetCoins"
+      "balance": "Balance: {{count}} PetCoins",
+      "withdraw_button": {
+        "withdraw": "Withdraw",
+        "confirming": "Confirming...",
+        "error": {
+          "label": "Error: {{error}}"
+        }
+      }
+    }
+  },
+  "web3": {
+    "error": {
+      "User rejected the request.": "User rejected the request"
     }
   },
   "tokenomics": {
