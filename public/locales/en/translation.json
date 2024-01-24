@@ -36,9 +36,9 @@
     "copied_button": "Copied",
     "referral_balance": {
       "header": "Affiliate statistic",
-      "balance": "Balance: {{count}} PetCoins",
+      "balance": "Balance: {{count}} PetCoins ({{countSecondary}} {{secondaryCurrency}})",
       "withdraw_button": {
-        "withdraw": "Withdraw",
+        "confirm": "Withdraw",
         "confirming": "Confirming...",
         "error": {
           "label": "Error: {{error}}"
@@ -46,14 +46,10 @@
       }
     }
   },
-  "web3": {
-    "error": {
-      "User rejected the request.": "User rejected the request"
-    }
-  },
   "tokenomics": {
     "header": "Tokenomics",
-    "cycle_duration": "Cycle duration is {{duration}} {{cycle_inflection}}",
+    "exchange_rates_info": "Exchange rates: for 1 {{secondaryCurrency}} you will get {{amount}} {{primaryCurrency}}",
+    "cycle_duration": "Cycle duration: {{duration}} {{cycle_inflection}}",
     "cycle_inflections": {
       "one": "hour",
       "few": "hours",
@@ -116,5 +112,7 @@
   },
   "grid": {
     "empty": "Nothing to show"
-  }
+  },
+  "User rejected the request.": "User rejected the request",
+  "Connector not connected.": "Wallet not connected"
 }

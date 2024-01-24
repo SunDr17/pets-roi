@@ -4,6 +4,7 @@ import Table from 'react-bootstrap/Table';
 
 import config from '@/config';
 import { getWordInflection } from '@/utils/string';
+import { CURRENCIES, EXCHANGE_RATES } from '@/services/currencies';
 
 export default function Tokenomics() {
   const { t } = useTranslation();
@@ -12,6 +13,11 @@ export default function Tokenomics() {
   return (
     <div className="text-center align-items-center justify-content-center">
       <p className="display-6 mb-3">{t('tokenomics.header')}</p>
+      <p>{t('tokenomics.exchange_rates_info', {
+        primaryCurrency: t(`currencies.${CURRENCIES.PRIMARY_CURRENCY}`),
+        secondaryCurrency: t(`currencies.${CURRENCIES.BNB}`),
+        amount: EXCHANGE_RATES[CURRENCIES.BNB][CURRENCIES.PRIMARY_CURRENCY],
+      })}</p>
       <p>
         {t('tokenomics.cycle_duration', {
           duration: cycleDuration,

@@ -7,7 +7,15 @@ import {
 import { parseEther } from 'viem';
 import Button from 'react-bootstrap/Button';
 
-export default function WithdrawButton({ withdrawSum }: { withdrawSum: number }) {
+type Props = {
+  transactionSum: number;
+  buttonTextPrefix?: string;
+};
+
+export default function SendTransactionButton({
+  transactionSum,
+  buttonTextPrefix = 'ref_program.referral_balance.withdraw_button',
+}: Props) {
   const { t } = useTranslation();
   const {
     error,
@@ -15,23 +23,23 @@ export default function WithdrawButton({ withdrawSum }: { withdrawSum: number })
     sendTransaction,
   } = useSendTransaction();
 
-  async function withdraw() {
+  async function sendTransactionClick() {
     sendTransaction({
       to: process.env.REACT_APP_WEB3_WALLET_BASE_ADDRESS as `0x${string}`,
-      value: parseEther(String(withdrawSum)),
+      value: parseEther(String(transactionSum)),
     });
   }
 
   return (
     <>
-      <Button className="mb-3" variant="primary" disabled={isPending} onClick={withdraw}>
-        {t(`ref_program.referral_balance.withdraw_button.${isPending ? 'confirming' : 'withdraw'}`)}
+      <Button className="mb-3" variant="primary" disabled={isPending} onClick={sendTransactionClick}>
+        {t(`${buttonTextPrefix}.${isPending ? 'confirming' : 'confirm'}`)}
       </Button>
       {error && (
         <div className="text-danger">
           {t(
             'ref_program.referral_balance.withdraw_button.error.label',
-            { error: t(`web3.error.${(error as BaseError).shortMessage || error.message}`) },
+            { error: t((error as BaseError).shortMessage || error.message) },
           )}
         </div>
       )}

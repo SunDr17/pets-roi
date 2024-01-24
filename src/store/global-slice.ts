@@ -9,7 +9,7 @@ type GlobalSliceState = {
 };
 
 const initialState: GlobalSliceState = {
-  userCurrentBalance: Number(localStorage.getItem(CURRENT_BALANCE_KEY)) || 100000, // TODO: mock data, replace with 0
+  userCurrentBalance: Number(localStorage.getItem(CURRENT_BALANCE_KEY)) || 0,
   modal: {
     show: false,
   },

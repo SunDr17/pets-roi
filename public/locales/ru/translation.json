@@ -24,9 +24,9 @@
     "copied_button": "Скопировано",
     "referral_balance": {
       "header": "Партнерская статистика",
-      "balance": "Баланс: {{count}} PetCoins",
+      "balance": "Баланс: {{countPrimary}} PetCoins ({{countSecondary}} {{secondaryCurrency}})",
       "withdraw_button": {
-        "withdraw": "Вывод средств",
+        "confirm": "Вывод средств",
         "confirming": "Подтверждение...",
         "error": {
           "label": "Ошибка: {{error}}"
@@ -34,14 +34,10 @@
       }
     }
   },
-  "web3": {
-    "error": {
-      "User rejected the request.": "Пользователь отклонил запрос"
-    }
-  },
   "tokenomics": {
     "header": "Токеномика",
-    "cycle_duration": "Длинна цикла {{duration}} {{cycle_inflection}}",
+    "exchange_rates_info": "Курс обмена: за 1 {{secondaryCurrency}} вы получите {{amount}} {{primaryCurrency}}",
+    "cycle_duration": "Длинна цикла: {{duration}} {{cycle_inflection}}",
     "cycle_inflections": {
       "one": "час",
       "few": "часа",
@@ -116,5 +112,7 @@
   },
   "grid": {
     "empty": "Ничего не найдено."
-  }
+  },
+  "User rejected the request.": "Пользователь отклонил запрос",
+  "Connector not connected.": "Кошелек не подключен"
 }

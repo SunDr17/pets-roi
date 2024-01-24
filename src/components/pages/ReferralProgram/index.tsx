@@ -5,13 +5,19 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 import { getReferralLink, getReferralBalance } from '@/services/data/referral';
-import WithdrawButton from '@/components/common/web3/WithdrawButton';
+import { convertCurrencies, CURRENCIES } from '@/services/currencies';
+import SendTransactionButton from '@/components/common/web3/SendTransactionButton';
 
 export default function ReferralProgram() {
   const { t } = useTranslation();
   const [isCopied, setIsCopied] = useState(false);
   const referralLink = getReferralLink();
   const referralBalance = getReferralBalance();
+  const referralBalanceInBnb = convertCurrencies(
+    CURRENCIES.PRIMARY_CURRENCY,
+    CURRENCIES.BNB,
+    referralBalance,
+  ).amount;
 
   const copyToClipboard = () => {
     if (!isCopied) {
@@ -35,11 +41,14 @@ export default function ReferralProgram() {
       </div>
       <div>
         <p className="display-6">{t('ref_program.referral_balance.header')}</p>
-        <p>{t('ref_program.referral_balance.balance', { count: referralBalance })}</p>
-        <WithdrawButton withdrawSum={referralBalance} />
-        {/* TODO: remove it, test for secret vars in github */}
-        <p>{process.env.REACT_APP_WEB3_PROJECT_ID}</p>
-        <p>{process.env.REACT_APP_WEB3_WALLET_BASE_ADDRESS}</p>
+        <p>
+          {t('ref_program.referral_balance.balance', {
+            countPrimary: Number(referralBalance.toFixed(2)),
+            countSecondary: Number(referralBalanceInBnb.toFixed(6)),
+            secondaryCurrency: t(`currencies.${CURRENCIES.BNB}`),
+          })}
+        </p>
+        <SendTransactionButton transactionSum={referralBalanceInBnb} />
       </div>
     </Container>
   );

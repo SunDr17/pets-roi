@@ -44,22 +44,22 @@ export default function TokenomicInfo() {
 
   return (
     <>
-      <Container>
+      {boughtAmount > 0 && <Container>
         <p>
           {t('bought_amount')}: {boughtAmount} {t('currency')}
         </p>
         <p>
           {t('user_current_percent')}: {getCurrentProfitPercent()}%
         </p>
-        {boughtAmount > 0 && <p>
+        <p>
           {t('homepage.user_current_profit')}: {currentProfit.toFixed(4)} {t('currency')}
-        </p>}
-        {boughtAmount > 0 && <p>
+        </p>
+        <p>
           {t('homepage.timer')}:{' '}
           {<Countdown timer={nextCycleTimer} completeText={t('completeCountdownText')} />}
-        </p>}
-        {boughtAmount > 0 && <FinishCycleModalButton onFinishCycle={onFinishCycleButtonClick} />}
-      </Container>
+        </p>
+        <FinishCycleModalButton onFinishCycle={onFinishCycleButtonClick} />
+      </Container>}
     </>
   );
 }

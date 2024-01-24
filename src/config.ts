@@ -12,7 +12,7 @@ const config = {
     140000: 2.9,
     150000: 3,
   } as { [index: string]: number },
-  currencyInBNB: 1000,
+  currencyInBNB: 100000,
   cycleDuration: 24 * 60 * 60 * 1000,
   socialLinks: {
     'twitter-x': 'https://twitter.com/',

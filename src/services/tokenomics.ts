@@ -7,15 +7,7 @@ export const CURRENT_BALANCE_KEY = 'current_balance';
 export const WORKING_BALANCE_KEY = 'working_balance';
 
 export function getCurrentBalance(key: string = CURRENT_BALANCE_KEY) {
-  let balance = Number(localStorage.getItem(key));
-
-  // TODO: temp solution, mock balance
-  if (!balance && key === CURRENT_BALANCE_KEY) {
-    balance = 100000;
-    setCurrentBalance(balance, key);
-  }
-
-  return balance;
+  return Number(localStorage.getItem(key));
 }
 
 export function setCurrentBalance(balance: number, key: string = CURRENT_BALANCE_KEY) {

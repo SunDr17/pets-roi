@@ -7,6 +7,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 
 import config from '@/config';
 import Icon from '@/components/common/Icon';
+import TopUpModalButton from '@/components/pages/Home/TopUpModalButton';
 
 export default function Footer() {
   const { t } = useTranslation();
@@ -16,6 +17,7 @@ export default function Footer() {
       <Navbar>
         <Container>
           <Nav className="m-auto flex-wrap">
+            <TopUpModalButton text={t('menu.buy_tokens')} />
             <LinkContainer to="/">
               <Nav.Link>{t('inventory')}</Nav.Link>
             </LinkContainer>

@@ -8,7 +8,7 @@ import { hideModal, showModal } from '@/store/global-slice';
 import { CURRENCIES } from '@/services/currencies';
 import TopUpForm from '@/components/common/TopUpForm';
 
-function TopUpModalButton() {
+function TopUpModalButton({ text }: { text: string }) {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
@@ -33,7 +33,7 @@ function TopUpModalButton() {
   return (
     <Nav.Item>
       <Nav.Link onClick={openModal}>
-        {t('menu.buy_tokens')}
+        {text}
       </Nav.Link>
     </Nav.Item>
   );

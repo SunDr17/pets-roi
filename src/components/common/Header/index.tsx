@@ -24,12 +24,14 @@ export default function Header() {
             <img className={styles.logo} alt="PetsROI" src={process.env.PUBLIC_URL + '/images/logo.svg'} />
           </LinkContainer>
           <div className={styles.userBalance}>
-            {t('menu.balance', { count: userCurrentBalance })}
+            {/* TODO: change to withdraw button */}
+            <TopUpModalButton text={t('menu.balance', { count: userCurrentBalance })} />
           </div>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className={styles.menu}>
           <Nav className="m-auto">
+            <TopUpModalButton text={t('menu.buy_tokens')} />
             <LinkContainer to="/">
               <Nav.Link>{t('inventory')}</Nav.Link>
             </LinkContainer>
@@ -38,7 +40,6 @@ export default function Header() {
             </LinkContainer>
           </Nav>
           <Nav>
-            <TopUpModalButton />
             <ConnectWallet />
           </Nav>
         </Navbar.Collapse>
