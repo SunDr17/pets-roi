@@ -56,7 +56,10 @@
   "top_up": {
     "exchange_rates_info": "Курс обмена: за 1 {{secondaryCurrency}} вы получите {{amount}} {{primaryCurrency}}",
     "message": "Вы получите {{amount}} PetCoin'ов",
-    "submit_button": "Пополнить",
+    "submit_button": {
+      "confirm": "Пополнить",
+      "confirming": "Подтверждение..."
+    },
     "close_modal": "Отменить"
   },
   "bought_amount": "Потрачено",
@@ -114,5 +117,6 @@
     "empty": "Ничего не найдено."
   },
   "User rejected the request.": "Пользователь отклонил запрос",
-  "Connector not connected.": "Кошелек не подключен"
+  "Connector not connected.": "Кошелек не подключен",
+  "An internal error was received.": "Неизвестная ошибка"
 }

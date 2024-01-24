@@ -6,6 +6,7 @@ import { useAppDispatch } from '@/store/hooks';
 import {
   addProfitToBalance,
   getCurrentBalance,
+  getCycleStartTime,
   setCycleStartTime,
   WORKING_BALANCE_KEY,
 } from '@/services/tokenomics';
@@ -27,7 +28,9 @@ export default function useBuyItem() {
       // add price to user working balance
       addProfitToBalance(itemToBuy.price, WORKING_BALANCE_KEY);
 
-      setCycleStartTime(new Date().getTime());
+      if (!getCycleStartTime()) {
+        setCycleStartTime(new Date().getTime());
+      }
 
       navigate('/');
     } else {

@@ -10,29 +10,37 @@ import Button from 'react-bootstrap/Button';
 type Props = {
   transactionSum: number;
   buttonTextPrefix?: string;
+  className?: string;
+  onConfirm?: () => void;
 };
 
 export default function SendTransactionButton({
   transactionSum,
   buttonTextPrefix = 'ref_program.referral_balance.withdraw_button',
+  className = 'mb-3',
+  onConfirm,
 }: Props) {
   const { t } = useTranslation();
   const {
     error,
     isPending,
-    sendTransaction,
+    sendTransactionAsync,
   } = useSendTransaction();
 
   async function sendTransactionClick() {
-    sendTransaction({
+    await sendTransactionAsync({
       to: process.env.REACT_APP_WEB3_WALLET_BASE_ADDRESS as `0x${string}`,
       value: parseEther(String(transactionSum)),
     });
+
+    if (onConfirm) {
+      onConfirm();
+    }
   }
 
   return (
     <>
-      <Button className="mb-3" variant="primary" disabled={isPending} onClick={sendTransactionClick}>
+      <Button className={className} variant="primary" disabled={isPending} onClick={sendTransactionClick}>
         {t(`${buttonTextPrefix}.${isPending ? 'confirming' : 'confirm'}`)}
       </Button>
       {error && (

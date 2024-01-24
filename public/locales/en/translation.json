@@ -19,7 +19,10 @@
   "top_up": {
     "exchange_rates_info": "Exchange rates: for 1 {{secondaryCurrency}} you will get {{amount}} {{primaryCurrency}}",
     "message": "You will get {{amount}} PetCoins",
-    "submit_button": "Top up",
+    "submit_button": {
+      "confirm": "Top up",
+      "confirming": "Confirming..."
+    },
     "close_modal": "Close"
   },
   "inventory": "My pets",
