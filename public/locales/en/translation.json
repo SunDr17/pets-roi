@@ -11,6 +11,15 @@
     "tokenomics": "Tokenomics"
   },
   "currency": "PetCoins",
+  "currencies": {
+    "petCoins": "PetCoins",
+    "usdt": "USDT"
+  },
+  "top_up": {
+    "message": "You will get {{amount}} PetCoins",
+    "submit_button": "Top up",
+    "close_modal": "Close"
+  },
   "inventory": "My pets",
   "shop": {
     "tabs": {

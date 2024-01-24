@@ -35,6 +35,15 @@
     "and_more": "и больше"
   },
   "currency": "PetCoins",
+  "currencies": {
+    "petCoins": "PetCoins",
+    "usdt": "USDT"
+  },
+  "top_up": {
+    "message": "Вы получите {{amount}} PetCoin'ов",
+    "submit_button": "Пополнить",
+    "close_modal": "Отменить"
+  },
   "bought_amount": "Потрачено",
   "user_current_percent": "Текущий процент",
   "completeCountdownText": "Вы не будете получать профит, пока не покормите питомцев",
