@@ -30,7 +30,12 @@
   },
   "tokenomics": {
     "header": "Tokenomics",
-    "cycle_duration": "Cycle duration is {{duration}} hours",
+    "cycle_duration": "Cycle duration is {{duration}} {{cycle_inflection}}",
+    "cycle_inflections": {
+      "one": "hour",
+      "few": "hours",
+      "many": "hours"
+    },
     "working_balance": "Spent PetCoins amount",
     "percent": "Profit percent",
     "and_more": "and more"

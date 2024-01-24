@@ -10,7 +10,7 @@
     "ref_program": "Реферальная программа",
     "tokenomics": "Токеномика"
   },
-  "inventory": "Мой питомник",
+  "inventory": "Мои питомцы",
   "shop": {
     "tabs": {
       "dogs": "Собаки",
@@ -29,7 +29,12 @@
   },
   "tokenomics": {
     "header": "Токеномика",
-    "cycle_duration": "Длинна цикла {{duration}} часов",
+    "cycle_duration": "Длинна цикла {{duration}} {{cycle_inflection}}",
+    "cycle_inflections": {
+      "one": "час",
+      "few": "часа",
+      "many": "часов"
+    },
     "working_balance": "Количество потраченныйх PetCoin'ов",
     "percent": "Процент прибыли",
     "and_more": "и больше"
