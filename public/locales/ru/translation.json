@@ -40,6 +40,17 @@
     "and_more": "и больше"
   },
   "currency": "PetCoins",
+  "currencies": {
+    "primary_currency": "PetCoins",
+    "usdt": "USDT",
+    "bnb": "BNB"
+  },
+  "top_up": {
+    "exchange_rates_info": "Курс обмена: за 1 {{secondaryCurrency}} вы получите {{amount}} {{primaryCurrency}}",
+    "message": "Вы получите {{amount}} PetCoin'ов",
+    "submit_button": "Пополнить",
+    "close_modal": "Отменить"
+  },
   "bought_amount": "Потрачено",
   "user_current_percent": "Текущий процент",
   "completeCountdownText": "Вы не будете получать профит, пока не покормите питомцев",

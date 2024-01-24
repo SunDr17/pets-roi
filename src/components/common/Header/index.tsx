@@ -8,6 +8,7 @@ import { useAppSelector } from '@/store/hooks';
 import { selectUserCurrentBalance } from '@/store/selectors';
 import ConnectWallet from '@/components/common/web3/Wallet';
 import LanguageSelector from '@/components/common/LanguageSelector';
+import TopUpModalButton from '@/components/pages/Home/TopUpModalButton';
 
 import styles from './Header.module.css';
 
@@ -37,6 +38,7 @@ export default function Header() {
             </LinkContainer>
           </Nav>
           <Nav>
+            <TopUpModalButton />
             <ConnectWallet />
           </Nav>
         </Navbar.Collapse>

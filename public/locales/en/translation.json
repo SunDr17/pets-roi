@@ -11,6 +11,17 @@
     "tokenomics": "Tokenomics"
   },
   "currency": "PetCoins",
+  "currencies": {
+    "primary_currency": "PetCoins",
+    "usdt": "USDT",
+    "bnb": "BNB"
+  },
+  "top_up": {
+    "exchange_rates_info": "Exchange rates: for 1 {{secondaryCurrency}} you will get {{amount}} {{primaryCurrency}}",
+    "message": "You will get {{amount}} PetCoins",
+    "submit_button": "Top up",
+    "close_modal": "Close"
+  },
   "inventory": "My pets",
   "shop": {
     "tabs": {

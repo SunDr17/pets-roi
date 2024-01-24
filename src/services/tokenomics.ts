@@ -27,6 +27,10 @@ export function addProfitToBalance(profit: number, key: string = CURRENT_BALANCE
   setCurrentBalance(getCurrentBalance(key) + profit, key);
 }
 
+export function topUpBalance(amount: number, key: string = CURRENT_BALANCE_KEY) {
+  setCurrentBalance(getCurrentBalance(key) + amount, key);
+}
+
 export function getCycleStartTime() {
   return Number(localStorage.getItem('cycleStartTime'));
 }
