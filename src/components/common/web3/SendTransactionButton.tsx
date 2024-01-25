@@ -28,13 +28,17 @@ export default function SendTransactionButton({
   } = useSendTransaction();
 
   async function sendTransactionClick() {
-    await sendTransactionAsync({
-      to: process.env.REACT_APP_WEB3_WALLET_BASE_ADDRESS as `0x${string}`,
-      value: parseEther(String(transactionSum)),
-    });
+    try {
+      await sendTransactionAsync({
+        to: process.env.REACT_APP_WEB3_WALLET_BASE_ADDRESS as `0x${string}`,
+        value: parseEther(String(transactionSum)),
+      });
 
-    if (onConfirm) {
-      onConfirm();
+      if (onConfirm) {
+        onConfirm();
+      }
+    } catch (e) {
+      // errors handled by useSendTransaction().error prop
     }
   }
 

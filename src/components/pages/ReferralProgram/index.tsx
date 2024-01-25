@@ -48,7 +48,7 @@ export default function ReferralProgram() {
             secondaryCurrency: t(`currencies.${CURRENCIES.BNB}`),
           })}
         </p>
-        <SendTransactionButton transactionSum={referralBalanceInBnb} />
+        <SendTransactionButton transactionSum={Number(referralBalanceInBnb.toFixed(6))} />
       </div>
     </Container>
   );

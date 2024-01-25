@@ -29,7 +29,7 @@ function Modal(props: ModalType) {
       {...props}
       show={modal.show}
       onHide={onHide}
-      size="lg"
+      size={modalProps.size ?? 'lg'}
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >

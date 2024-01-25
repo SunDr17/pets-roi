@@ -16,7 +16,7 @@ export default function MiniCard({ item }: { item: Item }) {
   function renderCard() {
     return (
       <Card bsPrefix={cn(styles['card-flyer'], 'text-center flex-fill card')}>
-        <div className="image-box pt-2">
+        <div className="image-box d-flex flex-grow-1 flex-column justify-content-center align-items-center pt-2">
           {isSvg(item.imageSrc)
             ? <FilledSvg
               src={item.imageSrc}
@@ -31,7 +31,7 @@ export default function MiniCard({ item }: { item: Item }) {
             />
           }
         </div>
-        <Card.Body>
+        <Card.Body className="d-flex flex-grow-0 flex-column justify-content-end align-items-center">
           <Card.Title>{item.fullName ?? item.name}</Card.Title>
           <Card.Text>
             {t('miniCard.price', { price: item.price })}

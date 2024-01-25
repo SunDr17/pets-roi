@@ -20,6 +20,7 @@ function FinishCycleModalButton({ onFinishCycle }: Props) {
 
   const openModal = () => {
     dispatch(showModal({
+      size: 'sm',
       onConfirm,
       header: t('finish_cycle_modal.header'),
       body: t('finish_cycle_modal.body'),
