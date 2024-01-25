@@ -27,3 +27,8 @@ export function getReferralBalance() {
   // TODO: get value from BE
   return 12350;
 }
+
+export function getReferralPartnersQuantity() {
+  // TODO: get value from BE
+  return 7;
+}

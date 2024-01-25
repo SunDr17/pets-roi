@@ -40,6 +40,7 @@
     "referral_balance": {
       "header": "Affiliate statistic",
       "balance": "Balance: {{count}} PetCoins ({{countSecondary}} {{secondaryCurrency}})",
+      "count_people": "Partners quantity: {{countPeople}}",
       "withdraw_button": {
         "confirm": "Withdraw",
         "confirming": "Confirming...",
@@ -72,7 +73,7 @@
     "grid": {
       "empty": {
         "header": "You have not bought anything yet",
-        "body": "Buy your buddy",
+        "body": "Buy your buddy and check out our <tokenomicLink>tokenomics</tokenomicLink>",
         "button": "Go to Shop"
       }
     }

@@ -4,7 +4,11 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-import { getReferralLink, getReferralBalance } from '@/services/data/referral';
+import {
+  getReferralLink,
+  getReferralBalance,
+  getReferralPartnersQuantity,
+} from '@/services/data/referral';
 import { convertCurrencies, CURRENCIES } from '@/services/currencies';
 import SendTransactionButton from '@/components/common/web3/SendTransactionButton';
 
@@ -18,6 +22,7 @@ export default function ReferralProgram() {
     CURRENCIES.BNB,
     referralBalance,
   ).amount;
+  const partnersQuantity = getReferralPartnersQuantity();
 
   const copyToClipboard = () => {
     if (!isCopied) {
@@ -41,6 +46,7 @@ export default function ReferralProgram() {
       </div>
       <div>
         <p className="display-6">{t('ref_program.referral_balance.header')}</p>
+        <p>{t('ref_program.referral_balance.count_people', { countPeople: partnersQuantity })}</p>
         <p>
           {t('ref_program.referral_balance.balance', {
             countPrimary: Number(referralBalance.toFixed(2)),

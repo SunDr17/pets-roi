@@ -98,7 +98,7 @@ function FullCard({ item }: { item: Item }) {
         </Col>
         <Col xs="12" sm="6" md="6" lg="4" className="ml-5">
           {isItemImageSvg
-            ? <FilledSvg src={item.imageSrc} color={color} />
+            ? <FilledSvg src={item.imageSrc} color={color!} />
             : <Image src={item.imageSrc} fluid />
           }
         </Col>

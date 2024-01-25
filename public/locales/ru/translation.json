@@ -25,6 +25,7 @@
     "referral_balance": {
       "header": "Партнерская статистика",
       "balance": "Баланс: {{countPrimary}} PetCoins ({{countSecondary}} {{secondaryCurrency}})",
+      "count_people": "Количество партнеров: {{countPeople}}",
       "withdraw_button": {
         "confirm": "Вывод средств",
         "confirming": "Подтверждение...",
@@ -72,7 +73,7 @@
     "grid": {
       "empty": {
         "header": "У вас еще нет покупок",
-        "body": "Купите себе любимца",
+        "body": "Купите себе любимца и ознокомтесь с нашей <tokenomicLink>токеномикой</tokenomicLink>",
         "button": "В магазин"
       }
     }

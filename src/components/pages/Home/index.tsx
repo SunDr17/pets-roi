@@ -1,5 +1,6 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
+import { useTranslation, Trans } from 'react-i18next';
 import { LinkContainer } from 'react-router-bootstrap';
 import Container from 'react-bootstrap/Container';
 import { Col, Row } from 'react-bootstrap';
@@ -25,7 +26,14 @@ export default function Home() {
             emptyPlaceholder={(
               <div>
                 <p>{t('homepage.grid.empty.header')}</p>
-                <p>{t('homepage.grid.empty.body')}</p>
+                <p>
+                  <Trans
+                    i18nKey="homepage.grid.empty.body"
+                    components={{
+                      tokenomicLink: <Link to="tokenomics" />,
+                    }}
+                  />
+                </p>
                 <LinkContainer to="/shop">
                   <Button>{t('homepage.grid.empty.button')}</Button>
                 </LinkContainer>

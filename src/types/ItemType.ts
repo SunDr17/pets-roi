@@ -8,7 +8,7 @@ export interface Item {
   name: string;
   price: number;
   imageSrc: string;
-  defaultColor: string;
+  defaultColor?: string;
   color?: string;
   gender?: string;
   fullName?: string;
