@@ -1,5 +1,5 @@
 import React, { useState, memo } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import Container from 'react-bootstrap/Container';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
@@ -7,11 +7,12 @@ import Image from 'react-bootstrap/Image';
 import { Item } from '@/types/ItemType';
 import { isSvg } from '@/utils/image';
 import FilledSvg from '@/components/common/FilledSvg';
+import TopUpModalButton from '@/components/pages/Home/TopUpModalButton';
 import useBuyItem from './hooks/useBuyItem';
 
 function FullCard({ item }: { item: Item }) {
   const { t } = useTranslation();
-  const [error, setError] = useState('');
+  const [error, setError] = useState<React.ReactNode>('');
   const [name, setName] = useState('');
   const [gender, setGender] = useState('');
   const [color, setColor] = useState(item.color || item.defaultColor);
@@ -32,7 +33,17 @@ function FullCard({ item }: { item: Item }) {
       buyItem(saveItem);
     } catch (error: any) {
       if (error.message === 'insufficient_balance') {
-        setError(t('fullCard.error.insufficient_balance'));
+        setError(
+          <Trans
+            i18nKey="fullCard.error.insufficient_balance.text"
+            components={{
+              topUpLink: <TopUpModalButton
+                className="link-primary"
+                text={t('fullCard.error.insufficient_balance.top_up')}
+              />,
+            }}
+          />
+        );
       } else {
         setError(error.message);
       }

@@ -4,13 +4,13 @@
     "confirm": "Confirm"
   },
   "menu": {
-    "balance": "Balance: {{count}} PetCoins",
-    "buy_tokens": "Buy PetCoins",
+    "balance": "Balance: {{count}} $t(currencies.primary_currency)",
+    "buy_tokens": "Buy $t(currencies.primary_currency)",
     "shop": "Shop",
     "ref_program": "Referral program",
     "tokenomics": "Tokenomics"
   },
-  "currency": "PetCoins",
+  "currency": "$t(currencies.primary_currency)",
   "currencies": {
     "primary_currency": "PetCoins",
     "usdt": "USDT",
@@ -18,7 +18,7 @@
   },
   "top_up": {
     "exchange_rates_info": "Exchange rates: for 1 {{secondaryCurrency}} you will get {{amount}} {{primaryCurrency}}",
-    "message": "You will get {{amount}} PetCoins",
+    "message": "You will get {{amount}} $t(currencies.primary_currency)",
     "submit_button": {
       "confirm": "Top up",
       "confirming": "Confirming..."
@@ -39,7 +39,7 @@
     "copied_button": "Copied",
     "referral_balance": {
       "header": "Affiliate statistic",
-      "balance": "Balance: {{count}} PetCoins ({{countSecondary}} {{secondaryCurrency}})",
+      "balance": "Balance: {{count}} $t(currencies.primary_currency) ({{countSecondary}} {{secondaryCurrency}})",
       "count_people": "Partners quantity: {{countPeople}}",
       "withdraw_button": {
         "confirm": "Withdraw",
@@ -59,7 +59,7 @@
       "few": "hours",
       "many": "hours"
     },
-    "working_balance": "Spent PetCoins amount",
+    "working_balance": "Spent $t(currencies.primary_currency) amount",
     "percent": "Profit percent",
     "and_more": "and more"
   },
@@ -73,13 +73,13 @@
     "grid": {
       "empty": {
         "header": "You have not bought anything yet",
-        "body": "Buy your buddy and check out our <tokenomicLink>tokenomics</tokenomicLink>",
+        "body": "Check out our <tokenomicLink>tokenomics</tokenomicLink> and buy your buddy",
         "button": "Go to Shop"
       }
     }
   },
   "miniCard": {
-    "price": "{{price}} PetCoins"
+    "price": "{{price}} $t(currencies.primary_currency)"
   },
   "language": {
     "en": "EN",
@@ -106,12 +106,15 @@
       "buy": "Buy"
     },
     "error": {
-      "insufficient_balance": "You have no enough PetCoins"
+      "insufficient_balance": {
+        "text": "You have no enough $t(currencies.primary_currency). <topUpLink />",
+        "top_up": "Top up balance >"
+      }
     }
   },
   "finish_cycle_modal": {
     "header": "Are you sure?",
-    "body": "After feeding PetCoins will be added to your current balance",
+    "body": "After feeding $t(currencies.primary_currency) will be added to your current balance",
     "confirm": "Feed"
   },
   "grid": {

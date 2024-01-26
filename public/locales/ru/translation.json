@@ -4,8 +4,8 @@
     "confirm": "Подтвердить"
   },
   "menu": {
-    "balance": "Баланс: {{count}} PetCoins",
-    "buy_tokens": "Купить PetCoins",
+    "balance": "Баланс: {{count}} $t(currencies.primary_currency)",
+    "buy_tokens": "Купить $t(currencies.primary_currency)",
     "shop": "Магазин",
     "ref_program": "Реферальная программа",
     "tokenomics": "Токеномика"
@@ -24,7 +24,7 @@
     "copied_button": "Скопировано",
     "referral_balance": {
       "header": "Партнерская статистика",
-      "balance": "Баланс: {{countPrimary}} PetCoins ({{countSecondary}} {{secondaryCurrency}})",
+      "balance": "Баланс: {{countPrimary}} $t(currencies.primary_currency) ({{countSecondary}} {{secondaryCurrency}})",
       "count_people": "Количество партнеров: {{countPeople}}",
       "withdraw_button": {
         "confirm": "Вывод средств",
@@ -44,19 +44,20 @@
       "few": "часа",
       "many": "часов"
     },
-    "working_balance": "Количество потраченныйх PetCoin'ов",
+    "working_balance": "Количество потраченныйх $t(currency_single)'ов",
     "percent": "Процент прибыли",
     "and_more": "и больше"
   },
-  "currency": "PetCoins",
+  "currency_single": "PetCoin",
+  "currency": "$t(currencies.primary_currency)",
   "currencies": {
-    "primary_currency": "PetCoins",
+    "primary_currency": "$t(currency_single)s",
     "usdt": "USDT",
     "bnb": "BNB"
   },
   "top_up": {
     "exchange_rates_info": "Курс обмена: за 1 {{secondaryCurrency}} вы получите {{amount}} {{primaryCurrency}}",
-    "message": "Вы получите {{amount}} PetCoin'ов",
+    "message": "Вы получите {{amount}} $t(currency_single)'ов",
     "submit_button": {
       "confirm": "Пополнить",
       "confirming": "Подтверждение..."
@@ -73,13 +74,13 @@
     "grid": {
       "empty": {
         "header": "У вас еще нет покупок",
-        "body": "Купите себе любимца и ознокомтесь с нашей <tokenomicLink>токеномикой</tokenomicLink>",
+        "body": "Ознокомтесь с нашей <tokenomicLink>токеномикой</tokenomicLink> и купите себе любимца",
         "button": "В магазин"
       }
     }
   },
   "miniCard": {
-    "price": "{{price}} PetCoins"
+    "price": "{{price}} $t(currencies.primary_currency)"
   },
   "language": {
     "en": "EN",
@@ -106,12 +107,15 @@
       "buy": "Купить"
     },
     "error": {
-      "insufficient_balance": "У вас недостаточно PetCoin'ов на балансе"
+      "insufficient_balance": {
+        "text": "У вас недостаточно $t(currency_single)'ов на балансе. <topUpLink />",
+        "top_up": "Пополнить баланс >"
+      }
     }
   },
   "finish_cycle_modal": {
     "header": "Вы уверены?",
-    "body": "После кормления PetCoins поступят на ваш Баланс",
+    "body": "После кормления $t(currencies.primary_currency) поступят на ваш Баланс",
     "confirm": "Кормить"
   },
   "grid": {

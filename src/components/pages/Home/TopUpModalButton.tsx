@@ -8,7 +8,7 @@ import { hideModal, showModal } from '@/store/global-slice';
 import { CURRENCIES } from '@/services/currencies';
 import TopUpForm from '@/components/common/TopUpForm';
 
-function TopUpModalButton({ text }: { text: string }) {
+function TopUpModalButton({ text, className = '' }: { text: string, className?: string }) {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
@@ -31,7 +31,7 @@ function TopUpModalButton({ text }: { text: string }) {
   };
 
   return (
-    <Nav.Item>
+    <Nav.Item className={className}>
       <Nav.Link onClick={openModal}>
         {text}
       </Nav.Link>
