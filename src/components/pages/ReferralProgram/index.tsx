@@ -21,7 +21,7 @@ export default function ReferralProgram() {
     CURRENCIES.PRIMARY_CURRENCY,
     CURRENCIES.BNB,
     referralBalance,
-  ).amount;
+  ).amountTo;
   const partnersQuantity = getReferralPartnersQuantity();
 
   const copyToClipboard = () => {

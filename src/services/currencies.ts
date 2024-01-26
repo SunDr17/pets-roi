@@ -18,9 +18,11 @@ interface exchangeRates {
   [key: string]: currencyPrice,
 }
 
-type currencyAmount = {
-  amount: number;
-  currency: string;
+type convertedCurrencies = {
+  amountFrom: number,
+  amountTo: number,
+  currencyFrom: string,
+  currencyTo: string,
 }
 
 const createExchangeRates = () => {
@@ -39,9 +41,20 @@ const createExchangeRates = () => {
 
 export const EXCHANGE_RATES = createExchangeRates();
 
-export function convertCurrencies(from: string, to: string, amount: number): currencyAmount {
+export function convertCurrencies(
+  from: string,
+  to: string,
+  amount: number,
+): convertedCurrencies {
+  const amountFrom = Number(amount.toFixed(config.decimalPrecision[from]));
+  const amountTo = Number(
+    (amountFrom * EXCHANGE_RATES[from][to]).toFixed(config.decimalPrecision[to])
+  );
+
   return {
-    amount: amount * EXCHANGE_RATES[from][to],
-    currency: to,
+    amountFrom,
+    amountTo,
+    currencyFrom: from,
+    currencyTo: to,
   };
 }

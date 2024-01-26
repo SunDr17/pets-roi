@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { InputGroup, Form, Stack } from 'react-bootstrap';
 
+import config from '@/config';
 import { useAppDispatch } from '@/store/hooks';
 import { addProfitToBalanceLocal, hideModal } from '@/store/global-slice';
 
@@ -14,6 +15,10 @@ type Props = {
   secondaryCurrency: string,
 };
 
+const isIncorrectNumberValue = (num: number, maxDecimals: number): boolean => {
+  return !num || num < 0 || String(num).split('.')[1]?.length > maxDecimals;
+};
+
 const TopUpForm = ({ primaryCurrency, secondaryCurrency }: Props) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
@@ -24,22 +29,28 @@ const TopUpForm = ({ primaryCurrency, secondaryCurrency }: Props) => {
   })
 
   const onChangePrimaryInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = Number(event.target.value) || 0;
-    const convertedValue = convertCurrencies(primaryCurrency, secondaryCurrency, value);
+    const value = parseFloat(event.target.value);
+
+    if (isIncorrectNumberValue(value, config.decimalPrecision[primaryCurrency])) return;
+
+    const convertedValues = convertCurrencies(primaryCurrency, secondaryCurrency, value);
 
     setInputValues({
-      primary: value,
-      secondary: convertedValue.amount,
+      primary: convertedValues.amountFrom,
+      secondary: convertedValues.amountTo,
     });
   };
 
   const onChangeSecondaryInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = Number(event.target.value) || 0;
-    const convertedValue = convertCurrencies(secondaryCurrency, primaryCurrency, value);
+    const value = parseFloat(event.target.value);
+
+    if (isIncorrectNumberValue(value, config.decimalPrecision[secondaryCurrency])) return;
+
+    const convertedValues = convertCurrencies(secondaryCurrency, primaryCurrency, value);
 
     setInputValues({
-      primary: convertedValue.amount,
-      secondary: value,
+      primary: convertedValues.amountTo,
+      secondary: convertedValues.amountFrom,
     });
   };
 
@@ -68,6 +79,9 @@ const TopUpForm = ({ primaryCurrency, secondaryCurrency }: Props) => {
         <InputGroup className="mb-3">
           <InputGroup.Text>{t(`currencies.${primaryCurrency}`)}</InputGroup.Text>
           <Form.Control
+            type='number'
+            step='0.1'
+            min='0'
             onChange={onChangePrimaryInput}
             value={inputValues.primary}
           />
@@ -75,6 +89,9 @@ const TopUpForm = ({ primaryCurrency, secondaryCurrency }: Props) => {
         <InputGroup className="mb-3">
           <InputGroup.Text>{t(`currencies.${secondaryCurrency}`)}</InputGroup.Text>
           <Form.Control
+            type='number'
+            step='0.1'
+            min='0'
             onChange={onChangeSecondaryInput}
             value={inputValues.secondary}
           />
