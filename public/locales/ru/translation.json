@@ -68,6 +68,7 @@
   "user_current_percent": "Текущий процент",
   "completeCountdownText": "Вы не будете получать профит, пока не покормите питомцев",
   "homepage": {
+    "wallet_not_connected": "Пожалуйста, подключите кошелек для покупки вашего питомца",
     "timer": "До следующего кормления",
     "finish_cycle_button": "Кормить",
     "user_current_profit": "Текущий профит",

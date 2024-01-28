@@ -3,3 +3,13 @@
 
 // Import Bootstrap and its default variables
 @import 'bootstrap';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/variables';
+
+.display-7 {
+  @include font-size(2rem);
+}
+
+.display-8 {
+  @include font-size(1.5rem);
+}
