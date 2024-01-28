@@ -28,8 +28,8 @@
   "inventory": "My pets",
   "shop": {
     "tabs": {
-      "dogs": "Dogs",
-      "cats": "Cats"
+      "dog": "Dogs",
+      "cat": "Cats"
     }
   },
   "ref_program": {
@@ -39,7 +39,7 @@
     "copied_button": "Copied",
     "referral_balance": {
       "header": "Affiliate statistic",
-      "balance": "Balance: {{count}} $t(currencies.primary_currency) ({{countSecondary}} {{secondaryCurrency}})",
+      "balance": "Balance: {{countPrimary}} $t(currencies.primary_currency) ({{countSecondary}} {{secondaryCurrency}})",
       "count_people": "Partners quantity: {{countPeople}}",
       "withdraw_button": {
         "confirm": "Withdraw",

@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import { Item } from '@/types/ItemType';
+import { BoughtItem } from '@/types/ItemType';
 import { buyItem } from '@/services/data/items';
 import { useAppDispatch } from '@/store/hooks';
 import {
@@ -16,7 +16,7 @@ export default function useBuyItem() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  return (itemToBuy: Item) => {
+  return (itemToBuy: BoughtItem) => {
     const currentUserBalance = getCurrentBalance();
 
     if (currentUserBalance >= itemToBuy.price) {

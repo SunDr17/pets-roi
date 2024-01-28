@@ -22,7 +22,7 @@ export default function ItemsGrid({
     <Row xs={rowProps.xs} sm={rowProps.sm} md={rowProps.md} lg={rowProps.lg} className="g-4">
       {items.map((item, idx) => (
         <Col key={idx} className="d-flex align-items-stretch">
-          <MiniCard key={`${item.name}-${item.id}`} item={item}/>
+          <MiniCard key={`${item.name}-${item._id}`} item={item}/>
         </Col>
       ))}
     </Row>

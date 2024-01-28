@@ -1,16 +1,26 @@
-import React from 'react';
+import React, { memo, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
+import { emptyInventory } from '@/types/ItemType';
 import { getShopData } from '@/services/data/items';
+import Spinner from '@/components/common/Spinner';
 import ItemsGrid from '@/components/common/ItemsGrid';
 
-export default function Shop() {
+function Shop() {
   const { t } = useTranslation();
-  const items = getShopData();
+  const [loading, setLoading] = useState(true);
+  const [items, setItems] = useState([emptyInventory]);
 
-  return (
+  useEffect(() => {
+    getShopData().then((items) => {
+      setItems(items);
+      setLoading(false);
+    });
+  }, []);
+
+  return !loading ? (
     <Tabs
       defaultActiveKey={items[0].title}
       id="uncontrolled-tab-example"
@@ -22,5 +32,7 @@ export default function Shop() {
         </Tab>
       ))}
     </Tabs>
-  );
+  ) : <Spinner />;
 }
+
+export default memo(Shop);

@@ -13,8 +13,8 @@
   "inventory": "Мои питомцы",
   "shop": {
     "tabs": {
-      "dogs": "Собаки",
-      "cats": "Коты"
+      "dog": "Собаки",
+      "cat": "Коты"
     }
   },
   "ref_program": {

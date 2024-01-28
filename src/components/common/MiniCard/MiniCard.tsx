@@ -4,13 +4,13 @@ import { LinkContainer } from 'react-router-bootstrap';
 import Card from 'react-bootstrap/Card';
 import cn from 'classnames';
 
-import { Item } from '@/types/ItemType';
+import { BoughtItem, Item } from '@/types/ItemType';
 import { isSvg } from '@/utils/image';
 import FilledSvg from '@/components/common/FilledSvg';
 
 import styles from './MiniCard.module.css';
 
-export default function MiniCard({ item }: { item: Item }) {
+export default function MiniCard({ item }: { item: Item | BoughtItem }) {
   const { t } = useTranslation();
 
   function renderCard() {
@@ -20,7 +20,7 @@ export default function MiniCard({ item }: { item: Item }) {
           {isSvg(item.imageSrc)
             ? <FilledSvg
               src={item.imageSrc}
-              color={item.color || item.defaultColor!}
+              color={'color' in item ? item.color! : item.defaultColor!}
               className="pt-2"
               width={100}
             />
@@ -33,7 +33,7 @@ export default function MiniCard({ item }: { item: Item }) {
           }
         </div>
         <Card.Body className="d-flex flex-grow-0 flex-column justify-content-end align-items-center">
-          <Card.Title>{item.fullName ?? item.name}</Card.Title>
+          <Card.Title>{'fullName' in item ? item.fullName : item.name}</Card.Title>
           <Card.Text>
             {t('miniCard.price', { price: item.price })}
           </Card.Text>
@@ -42,9 +42,9 @@ export default function MiniCard({ item }: { item: Item }) {
     );
   }
 
-  return !item.fullName ? (
-    <LinkContainer className={styles['cursor-pointer']} to={`/shop/item/${item.id}`}>
+  return 'fullName' in item ? renderCard() : (
+    <LinkContainer className={styles['cursor-pointer']} to={`/shop/item/${item._id}`}>
       {renderCard()}
     </LinkContainer>
-  ) : renderCard();
+  );
 }

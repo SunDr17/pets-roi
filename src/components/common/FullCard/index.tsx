@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
 
-import { Item } from '@/types/ItemType';
+import { BoughtItem, Item } from '@/types/ItemType';
 import { isSvg } from '@/utils/image';
 import FilledSvg from '@/components/common/FilledSvg';
 import TopUpModalButton from '@/components/pages/Home/TopUpModalButton';
@@ -15,14 +15,14 @@ function FullCard({ item }: { item: Item }) {
   const [error, setError] = useState<React.ReactNode>('');
   const [name, setName] = useState('');
   const [gender, setGender] = useState('');
-  const [color, setColor] = useState(item.color || item.defaultColor);
+  const [color, setColor] = useState(item.defaultColor);
 
   const isItemImageSvg = isSvg(item.imageSrc);
   const buyItem = useBuyItem();
 
   const onFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    const saveItem: Item = {
+    const saveItem: BoughtItem = {
       ...item,
       fullName: name,
       gender,
