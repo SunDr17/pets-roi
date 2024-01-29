@@ -110,7 +110,8 @@
       "insufficient_balance": {
         "text": "You have no enough $t(currencies.primary_currency). <topUpLink />",
         "top_up": "Top up balance >"
-      }
+      },
+      "unauthorized": "Please connect wallet for buying."
     }
   },
   "finish_cycle_modal": {

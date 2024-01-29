@@ -16,12 +16,13 @@ export default function useBuyItem() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  return (itemToBuy: BoughtItem) => {
+  return async (itemToBuy: BoughtItem) => {
     const currentUserBalance = getCurrentBalance();
 
     if (currentUserBalance >= itemToBuy.price) {
-      buyItem(itemToBuy);
+      await buyItem(itemToBuy);
 
+      // TODO: move logic to BE
       // revoke price from user balance
       addProfitToBalance(-itemToBuy.price);
       dispatch(addProfitToBalanceLocal(-itemToBuy.price));

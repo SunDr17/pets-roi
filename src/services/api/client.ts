@@ -1,14 +1,19 @@
-import axios, { AxiosResponse, AxiosHeaders } from 'axios';
+import axios, { AxiosHeaders } from 'axios';
 
 import { ApiResponse } from '@/types/ApiClientType';
+import { USER_HASH } from '@/services/user';
 
 const client = axios.create({
   baseURL: `${process.env.REACT_APP_API_BASE_PATH}/api/`,
 });
+if (localStorage.getItem(USER_HASH)) {
+  client.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem(USER_HASH)}`;
+}
 
 const baseResponse: ApiResponse = {
   data: null,
   error: null,
+  response: null,
 };
 
 function performError(error: any): string {
@@ -22,8 +27,9 @@ function performError(error: any): string {
 async function list(path: string) {
   try {
     baseResponse.data = await client.get(path);
-  } catch (error) {
+  } catch (error: any) {
     baseResponse.error = performError(error);
+    baseResponse.response = error.response;
   }
   return baseResponse;
 }
@@ -31,19 +37,19 @@ async function list(path: string) {
 async function getById(path: string, id: string) {
   try {
     baseResponse.data = await client.get(`${path}/${id}`);
-  } catch (error) {
+  } catch (error: any) {
     baseResponse.error = performError(error);
+    baseResponse.response = error.response;
   }
   return baseResponse;
 }
 
-
 async function add(path: string, data: any, headers?: AxiosHeaders) {
   try {
-    const response: AxiosResponse = await client.post(path, data, { headers });
-    return response;
-  } catch (error) {
+    baseResponse.data = await client.put(path, data, { headers });
+  } catch (error: any) {
     baseResponse.error = performError(error);
+    baseResponse.response = error.response;
   }
   return baseResponse;
 }

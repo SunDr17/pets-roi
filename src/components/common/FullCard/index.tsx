@@ -5,6 +5,7 @@ import { Button, Col, Form, Row } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
 
 import { BoughtItem, Item } from '@/types/ItemType';
+import { ErrorCodes } from '@/types/ApiClientType';
 import { isSvg } from '@/utils/image';
 import FilledSvg from '@/components/common/FilledSvg';
 import TopUpModalButton from '@/components/pages/Home/TopUpModalButton';
@@ -20,32 +21,41 @@ function FullCard({ item }: { item: Item }) {
   const isItemImageSvg = isSvg(item.imageSrc);
   const buyItem = useBuyItem();
 
-  const onFormSubmit = (event: React.FormEvent) => {
+  const onFormSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     const saveItem: BoughtItem = {
       ...item,
-      fullName: name,
+      name,
       gender,
       color,
     }
 
     try {
-      buyItem(saveItem);
+      await buyItem(saveItem);
     } catch (error: any) {
-      if (error.message === 'insufficient_balance') {
-        setError(
-          <Trans
-            i18nKey="fullCard.error.insufficient_balance.text"
-            components={{
-              topUpLink: <TopUpModalButton
-                className="link-primary"
-                text={t('fullCard.error.insufficient_balance.top_up')}
-              />,
-            }}
-          />
-        );
-      } else {
-        setError(error.message);
+      switch (error.message) {
+        case ErrorCodes.UnAuthorized: {
+          setError(t('fullCard.error.unauthorized'));
+          break;
+        }
+        case 'insufficient_balance': {
+          setError(
+            <Trans
+              i18nKey="fullCard.error.insufficient_balance.text"
+              components={{
+                topUpLink: <TopUpModalButton
+                  className="link-primary"
+                  text={t('fullCard.error.insufficient_balance.top_up')}
+                />,
+              }}
+            />
+          );
+          break;
+        }
+        default: {
+          setError(error.message);
+          break;
+        }
       }
     }
   }

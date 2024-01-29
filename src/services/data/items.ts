@@ -1,5 +1,6 @@
+import { ErrorCodes } from '@/types/ApiClientType';
 import { emptyInventory, Inventory, Item } from '@/types/ItemType';
-import { getById, list } from '@/services/api/client';
+import { add, getById, list } from '@/services/api/client';
 
 // TODO: remove mock data
 
@@ -45,8 +46,12 @@ export function getBoughtData(): (Item)[] {
   return boughtData ? JSON.parse(boughtData) : [];
 }
 
-export function buyItem(item: Item) {
-  const boughtData = getBoughtData();
-  boughtData.push(item);
-  localStorage.setItem(USER_BOUGHT_DATA, JSON.stringify(boughtData));
+export async function buyItem(item: Item) {
+  const response = await add(`shop-items/${item._id}/buy`, item);
+
+  if (response.error && response.response?.status === 401) {
+    throw Error(ErrorCodes.UnAuthorized);
+  }
+
+  return response.data;
 }

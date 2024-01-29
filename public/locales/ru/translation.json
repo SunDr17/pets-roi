@@ -111,7 +111,8 @@
       "insufficient_balance": {
         "text": "У вас недостаточно $t(currency_single)'ов на балансе. <topUpLink />",
         "top_up": "Пополнить баланс >"
-      }
+      },
+      "unauthorized": "Пожалуйста, подключите кошелек для покупки."
     }
   },
   "finish_cycle_modal": {
