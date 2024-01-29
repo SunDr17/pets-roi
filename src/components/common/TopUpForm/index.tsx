@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { InputGroup, Form, Stack } from 'react-bootstrap';
 
+import config from '@/config';
 import { useAppDispatch } from '@/store/hooks';
 import { addProfitToBalanceLocal, hideModal } from '@/store/global-slice';
 
@@ -14,44 +15,65 @@ type Props = {
   secondaryCurrency: string,
 };
 
+const DEFAULT_DECIMAL_PRECISION = 8;
+
+const createMask = (currency: string): RegExp => {
+  const dP = config.decimalPrecision[currency] || DEFAULT_DECIMAL_PRECISION;
+
+  return new RegExp(`^(0(\\.\\d{0,${dP}})?)?$|^[1-9]\\d*\\.?\\d{0,${dP}}$`);
+}
+
 const TopUpForm = ({ primaryCurrency, secondaryCurrency }: Props) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
   const [inputValues, setInputValues] = useState({
-    primary: 0,
-    secondary: 0,
-  })
+    primary: '0',
+    secondary: '0',
+  });
+
+  const primaryInputMask = useMemo(() => {
+    return createMask(primaryCurrency);
+  }, [primaryCurrency]);
+
+  const secondaryInputMask = useMemo(() => {
+    return createMask(secondaryCurrency);
+  }, [secondaryCurrency]);
 
   const onChangePrimaryInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = Number(event.target.value) || 0;
-    const convertedValue = convertCurrencies(primaryCurrency, secondaryCurrency, value);
+    if (!primaryInputMask.test(event.target.value)) return;
+
+    const value = parseFloat(event.target.value);
+    const convertedValues = convertCurrencies(primaryCurrency, secondaryCurrency, value);
 
     setInputValues({
-      primary: value,
-      secondary: convertedValue.amount,
+      primary: event.target.value,
+      secondary: convertedValues.amount.toString(),
     });
   };
 
   const onChangeSecondaryInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = Number(event.target.value) || 0;
-    const convertedValue = convertCurrencies(secondaryCurrency, primaryCurrency, value);
+    if (!secondaryInputMask.test(event.target.value)) return;
+
+    const value = parseFloat(event.target.value);
+    const convertedValues = convertCurrencies(secondaryCurrency, primaryCurrency, value);
 
     setInputValues({
-      primary: convertedValue.amount,
-      secondary: value,
+      primary: convertedValues.amount.toString(),
+      secondary: event.target.value,
     });
   };
 
   const onConfirmTopUp = () => {
-    if (!inputValues.primary) return null;
+    const sum = parseFloat(inputValues.primary);
+    if (!sum) return null;
 
-    topUpBalance(inputValues.primary);
-    dispatch(addProfitToBalanceLocal(inputValues.primary));
+    topUpBalance(sum);
+    dispatch(addProfitToBalanceLocal(sum));
 
     setInputValues({
-      primary: 0,
-      secondary: 0,
+      primary: '0',
+      secondary: '0',
     });
 
     dispatch(hideModal());
@@ -81,12 +103,12 @@ const TopUpForm = ({ primaryCurrency, secondaryCurrency }: Props) => {
         </InputGroup>
       </Stack>
       <Stack direction="horizontal" gap={3}>
-        <Form.Label>{t('top_up.message', { amount: inputValues.primary })}</Form.Label>
+        <Form.Label>{t('top_up.message', { amount: inputValues.primary || 0 })}</Form.Label>
         <SendTransactionButton
           className="p-2 ms-auto btn-success"
           buttonTextPrefix="top_up.submit_button"
           onConfirm={onConfirmTopUp}
-          transactionSum={inputValues.secondary}
+          transactionSum={parseFloat(inputValues.secondary)}
         />
       </Stack>
     </>

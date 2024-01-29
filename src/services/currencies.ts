@@ -41,7 +41,7 @@ export const EXCHANGE_RATES = createExchangeRates();
 
 export function convertCurrencies(from: string, to: string, amount: number): currencyAmount {
   return {
-    amount: amount * EXCHANGE_RATES[from][to],
+    amount: Number((amount * EXCHANGE_RATES[from][to]).toFixed(config.decimalPrecision[to])) || 0,
     currency: to,
   };
 }

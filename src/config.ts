@@ -13,6 +13,10 @@ const config = {
     150000: 3,
   } as { [index: string]: number },
   currencyInBNB: 100000,
+  decimalPrecision: {
+    primary_currency: 2,
+    bnb: 8,
+  } as { [index: string]: number },
   cycleDuration: 24 * 60 * 60 * 1000,
   socialLinks: {
     'twitter-x': 'https://twitter.com/',
