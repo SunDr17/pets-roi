@@ -103,7 +103,7 @@ const TopUpForm = ({ primaryCurrency, secondaryCurrency }: Props) => {
         </InputGroup>
       </Stack>
       <Stack direction="horizontal" gap={3}>
-        <Form.Label>{t('top_up.message', { amount: inputValues.primary })}</Form.Label>
+        <Form.Label>{t('top_up.message', { amount: inputValues.primary || 0 })}</Form.Label>
         <SendTransactionButton
           className="p-2 ms-auto btn-success"
           buttonTextPrefix="top_up.submit_button"
