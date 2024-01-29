@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { InputGroup, Form, Stack } from 'react-bootstrap';
 
@@ -15,54 +15,65 @@ type Props = {
   secondaryCurrency: string,
 };
 
-const isIncorrectNumberValue = (num: number, maxDecimals: number): boolean => {
-  return !num || num < 0 || String(num).split('.')[1]?.length > maxDecimals;
-};
+const DEFAULT_DECIMAL_PRECISION = 8;
+
+const createMask = (currency: string): RegExp => {
+  const decimalPrecision = config.decimalPrecision[currency] || DEFAULT_DECIMAL_PRECISION;
+
+  return new RegExp(`^\\d*(\\.|,)?\\d{0,${decimalPrecision}}$`);
+}
 
 const TopUpForm = ({ primaryCurrency, secondaryCurrency }: Props) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
   const [inputValues, setInputValues] = useState({
-    primary: 0,
-    secondary: 0,
-  })
+    primary: '0',
+    secondary: '0',
+  });
+
+  const primaryInputMask = useMemo(() => {
+    return createMask(primaryCurrency);
+  }, [primaryCurrency]);
+
+  const secondaryInputMask = useMemo(() => {
+    return createMask(secondaryCurrency);
+  }, [secondaryCurrency]);
 
   const onChangePrimaryInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (!primaryInputMask.test(event.target.value)) return;
+
     const value = parseFloat(event.target.value);
-
-    if (isIncorrectNumberValue(value, config.decimalPrecision[primaryCurrency])) return;
-
     const convertedValues = convertCurrencies(primaryCurrency, secondaryCurrency, value);
 
     setInputValues({
-      primary: convertedValues.amountFrom,
-      secondary: convertedValues.amountTo,
+      primary: event.target.value,
+      secondary: convertedValues.amount.toString(),
     });
   };
 
   const onChangeSecondaryInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (!secondaryInputMask.test(event.target.value)) return;
+
     const value = parseFloat(event.target.value);
-
-    if (isIncorrectNumberValue(value, config.decimalPrecision[secondaryCurrency])) return;
-
     const convertedValues = convertCurrencies(secondaryCurrency, primaryCurrency, value);
 
     setInputValues({
-      primary: convertedValues.amountTo,
-      secondary: convertedValues.amountFrom,
+      primary: convertedValues.amount.toString(),
+      secondary: event.target.value,
     });
   };
 
   const onConfirmTopUp = () => {
-    if (!inputValues.primary) return null;
+    const sum = parseFloat(inputValues.primary);
+    if (!sum) return null;
 
-    topUpBalance(inputValues.primary);
-    dispatch(addProfitToBalanceLocal(inputValues.primary));
+    topUpBalance(sum);
+    dispatch(addProfitToBalanceLocal(sum));
 
     setInputValues({
-      primary: 0,
-      secondary: 0,
+      primary: '0',
+      secondary: '0',
     });
 
     dispatch(hideModal());
@@ -79,9 +90,6 @@ const TopUpForm = ({ primaryCurrency, secondaryCurrency }: Props) => {
         <InputGroup className="mb-3">
           <InputGroup.Text>{t(`currencies.${primaryCurrency}`)}</InputGroup.Text>
           <Form.Control
-            type='number'
-            step='0.1'
-            min='0'
             onChange={onChangePrimaryInput}
             value={inputValues.primary}
           />
@@ -89,9 +97,6 @@ const TopUpForm = ({ primaryCurrency, secondaryCurrency }: Props) => {
         <InputGroup className="mb-3">
           <InputGroup.Text>{t(`currencies.${secondaryCurrency}`)}</InputGroup.Text>
           <Form.Control
-            type='number'
-            step='0.1'
-            min='0'
             onChange={onChangeSecondaryInput}
             value={inputValues.secondary}
           />
@@ -103,7 +108,7 @@ const TopUpForm = ({ primaryCurrency, secondaryCurrency }: Props) => {
           className="p-2 ms-auto btn-success"
           buttonTextPrefix="top_up.submit_button"
           onConfirm={onConfirmTopUp}
-          transactionSum={inputValues.secondary}
+          transactionSum={parseFloat(inputValues.secondary)}
         />
       </Stack>
     </>
