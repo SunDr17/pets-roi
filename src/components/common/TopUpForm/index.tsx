@@ -18,9 +18,9 @@ type Props = {
 const DEFAULT_DECIMAL_PRECISION = 8;
 
 const createMask = (currency: string): RegExp => {
-  const decimalPrecision = config.decimalPrecision[currency] || DEFAULT_DECIMAL_PRECISION;
+  const dP = config.decimalPrecision[currency] || DEFAULT_DECIMAL_PRECISION;
 
-  return new RegExp(`^\\d*(\\.)?\\d{0,${decimalPrecision}}$`);
+  return new RegExp(`^(0(\\.\\d{0,${dP}})?)?$|^[1-9]\\d*\\.?\\d{0,${dP}}$`);
 }
 
 const TopUpForm = ({ primaryCurrency, secondaryCurrency }: Props) => {
