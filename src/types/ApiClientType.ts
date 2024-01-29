@@ -8,4 +8,5 @@ export interface ApiResponse {
 
 export enum ErrorCodes {
   UnAuthorized = 'UnAuthorized',
+  Forbidden = 'Forbidden',
 }

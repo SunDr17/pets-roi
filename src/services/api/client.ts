@@ -1,20 +1,25 @@
 import axios, { AxiosHeaders } from 'axios';
 
 import { ApiResponse } from '@/types/ApiClientType';
-import { USER_HASH } from '@/services/user';
+import { USER_HASH_LOCAL } from '@/types/UserType';
 
 const client = axios.create({
   baseURL: `${process.env.REACT_APP_API_BASE_PATH}/api/`,
 });
-if (localStorage.getItem(USER_HASH)) {
-  client.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem(USER_HASH)}`;
-}
 
 const baseResponse: ApiResponse = {
   data: null,
   error: null,
   response: null,
 };
+
+function setCommonAuthHeader() {
+  if (localStorage.getItem(USER_HASH_LOCAL)) {
+    client.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem(USER_HASH_LOCAL)}`;
+  } else {
+    delete client.defaults.headers.common['Authorization'];
+  }
+}
 
 function performError(error: any): string {
   if (axios.isAxiosError(error)) {
@@ -44,7 +49,7 @@ async function getById(path: string, id: string) {
   return baseResponse;
 }
 
-async function add(path: string, data: any, headers?: AxiosHeaders) {
+async function add(path: string, data?: any, headers?: AxiosHeaders) {
   try {
     baseResponse.data = await client.put(path, data, { headers });
   } catch (error: any) {
@@ -54,4 +59,4 @@ async function add(path: string, data: any, headers?: AxiosHeaders) {
   return baseResponse;
 }
 
-export { list, getById, add };
+export { setCommonAuthHeader, list, getById, add };
