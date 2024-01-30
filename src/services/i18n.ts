@@ -21,7 +21,7 @@ i18n
     debug: process.env.NODE_ENV === 'development',
     load: 'languageOnly',
     backend: {
-      loadPath: '/pets-roi/locales/{{lng}}/{{ns}}.json', // TODO: temp solution for gh pages
+      loadPath: `${process.env.PUBLIC_URL}/locales/{{lng}}/{{ns}}.json`,
     }
   });
 

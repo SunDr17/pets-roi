@@ -10,7 +10,6 @@ declare module 'wagmi' {
   }
 }
 
-// TODO: fix bug when disconnecting site in MetaMask directly
 export const wagmiConfig = createConfig({
   chains: [bsc],
   connectors: [

@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
 
-import { BoughtItem, Item } from '@/types/ItemType';
+import { BoughtItemSaveFields, Genders, Item } from '@/types/ItemType';
 import { ErrorCodes } from '@/types/ApiClientType';
 import { isSvg } from '@/utils/image';
 import FilledSvg from '@/components/common/FilledSvg';
@@ -13,25 +13,24 @@ import useBuyItem from './hooks/useBuyItem';
 
 function FullCard({ item }: { item: Item }) {
   const { t } = useTranslation();
-  const [error, setError] = useState<React.ReactNode>('');
   const [name, setName] = useState('');
-  const [gender, setGender] = useState('');
+  const [gender, setGender] = useState(Genders.Male);
   const [color, setColor] = useState(item.defaultColor);
+  const [error, setError] = useState<React.ReactNode>('');
 
   const isItemImageSvg = isSvg(item.imageSrc);
   const buyItem = useBuyItem();
 
   const onFormSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    const saveItem: BoughtItem = {
-      ...item,
+    const saveItem: BoughtItemSaveFields = {
       name,
       gender,
       color,
     }
 
     try {
-      await buyItem(saveItem);
+      await buyItem(saveItem, item);
     } catch (error: any) {
       switch (error.message) {
         case ErrorCodes.UnAuthorized: {
@@ -83,9 +82,12 @@ function FullCard({ item }: { item: Item }) {
                 {t('fullCard.form.gender.label')}
               </Form.Label>
               <Col sm="9">
-                <Form.Select className="w-auto" onChange={(e) => setGender(e.target.value)}>
-                  <option value="male">{t('fullCard.form.gender.male')}</option>
-                  <option value="female">{t('fullCard.form.gender.female')}</option>
+                <Form.Select
+                  className="w-auto"
+                  onChange={(e) => setGender(e.target.value as Genders)}
+                >
+                  <option value={Genders.Male}>{t('fullCard.form.gender.male')}</option>
+                  <option value={Genders.Female}>{t('fullCard.form.gender.female')}</option>
                 </Form.Select>
               </Col>
             </Form.Group>

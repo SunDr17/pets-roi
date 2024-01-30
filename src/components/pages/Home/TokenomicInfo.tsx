@@ -3,28 +3,28 @@ import { useTranslation } from 'react-i18next';
 import Container from 'react-bootstrap/Container';
 
 import config from '@/config';
-import { addProfitToBalanceLocal } from '@/store/global-slice';
-import { useAppDispatch } from '@/store/hooks';
+import { useAppSelector } from '@/store/hooks';
+import { selectUserWorkingBalance } from '@/store/selectors';
 import useInterval from '@/hooks/useInterval';
+import useFinishCycle from '@/hooks/tokenomics/useFinishCycle';
+import useGetCurrentProfitPercent from '@/hooks/tokenomics/useGetCurrentProfitPercent';
+import useCalculateCurrentProfit from '@/hooks/tokenomics/useCalculateCurrentProfit';
 import {
-  addProfitToBalance,
-  calculateCurrentProfit,
-  getCurrentBalance,
-  getCurrentProfitPercent,
   getCycleStartTime,
   setCycleStartTime,
-  WORKING_BALANCE_KEY,
 } from '@/services/tokenomics';
 import Countdown from '@/components/common/Countdown';
+import FinishCycleModalButton from '@/components/pages/Home/FinishCycleModalButton';
 
 import './Home.module.css';
-import FinishCycleModalButton from '@/components/pages/Home/FinishCycleModalButton';
 
 export default function TokenomicInfo() {
   const { t } = useTranslation();
-  const dispatch = useAppDispatch();
 
-  const boughtAmount = getCurrentBalance(WORKING_BALANCE_KEY);
+  const finishCycle = useFinishCycle();
+  const currentProfitPercent = useGetCurrentProfitPercent();
+  const calculateCurrentProfit = useCalculateCurrentProfit();
+  const boughtAmount = useAppSelector(selectUserWorkingBalance);
   const cycleStartTime = getCycleStartTime();
 
   const [nextCycleTimer, setNextCycleTimer] = useState(cycleStartTime + config.cycleDuration);
@@ -34,9 +34,10 @@ export default function TokenomicInfo() {
     setCurrentProfit(calculateCurrentProfit());
   }, 1000);
 
-  const onFinishCycleButtonClick = () => {
-    addProfitToBalance(currentProfit);
-    dispatch(addProfitToBalanceLocal(currentProfit));
+  const onFinishCycleButtonClick = async () => {
+    await finishCycle(currentProfit);
+
+    // TODO: move cycleStartTime to BE
     setNextCycleTimer(new Date().getTime() + config.cycleDuration);
     setCurrentProfit(0);
     setCycleStartTime(new Date().getTime());
@@ -49,7 +50,7 @@ export default function TokenomicInfo() {
           {t('bought_amount')}: {boughtAmount} {t('currency')}
         </p>
         <p>
-          {t('user_current_percent')}: {getCurrentProfitPercent()}%
+          {t('user_current_percent')}: {currentProfitPercent}%
         </p>
         <p>
           {t('homepage.user_current_profit')}: {currentProfit.toFixed(4)} {t('currency')}

@@ -1,41 +1,39 @@
 import { useNavigate } from 'react-router-dom';
 
-import { BoughtItem } from '@/types/ItemType';
+import { BoughtItemSaveFields, Item } from '@/types/ItemType';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { setUser } from '@/store/global-slice';
+import { selectUserCurrentBalance } from '@/store/selectors';
+import { getCycleStartTime, setCycleStartTime } from '@/services/tokenomics';
 import { buyItem } from '@/services/data/items';
-import { useAppDispatch } from '@/store/hooks';
-import {
-  addProfitToBalance,
-  getCurrentBalance,
-  getCycleStartTime,
-  setCycleStartTime,
-  WORKING_BALANCE_KEY,
-} from '@/services/tokenomics';
-import { addProfitToBalanceLocal } from '@/store/global-slice';
+import { getCurrentUser } from '@/services/user';
 
 export default function useBuyItem() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const currentUserBalance = useAppSelector(selectUserCurrentBalance);
 
-  return async (itemToBuy: BoughtItem) => {
-    const currentUserBalance = getCurrentBalance();
+  return async (itemToBuy: BoughtItemSaveFields, item: Item) => {
+    try {
+      if (currentUserBalance >= item.price) {
+        await buyItem(item._id, itemToBuy);
 
-    if (currentUserBalance >= itemToBuy.price) {
-      await buyItem(itemToBuy);
+        const user = await getCurrentUser();
+        if (user) {
+          dispatch(setUser(user));
+        }
 
-      // TODO: move logic to BE
-      // revoke price from user balance
-      addProfitToBalance(-itemToBuy.price);
-      dispatch(addProfitToBalanceLocal(-itemToBuy.price));
-      // add price to user working balance
-      addProfitToBalance(itemToBuy.price, WORKING_BALANCE_KEY);
+        // TODO: move logic to BE
+        if (!getCycleStartTime()) {
+          setCycleStartTime(new Date().getTime());
+        }
 
-      if (!getCycleStartTime()) {
-        setCycleStartTime(new Date().getTime());
+        navigate('/');
+      } else {
+        throw Error('insufficient_balance');
       }
-
-      navigate('/');
-    } else {
-      throw Error('insufficient_balance');
+    } catch (error: any) {
+      throw Error(error.message);
     }
   }
 }

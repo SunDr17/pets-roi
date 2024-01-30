@@ -13,14 +13,6 @@ const baseResponse: ApiResponse = {
   response: null,
 };
 
-function setCommonAuthHeader() {
-  if (localStorage.getItem(USER_HASH_LOCAL)) {
-    client.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem(USER_HASH_LOCAL)}`;
-  } else {
-    delete client.defaults.headers.common['Authorization'];
-  }
-}
-
 function performError(error: any): string {
   if (axios.isAxiosError(error)) {
     return error.message;
@@ -29,7 +21,15 @@ function performError(error: any): string {
   }
 }
 
-async function list(path: string) {
+export function setCommonAuthHeader() {
+  if (localStorage.getItem(USER_HASH_LOCAL)) {
+    client.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem(USER_HASH_LOCAL)}`;
+  } else {
+    delete client.defaults.headers.common['Authorization'];
+  }
+}
+
+export async function list(path: string) {
   try {
     baseResponse.data = await client.get(path);
   } catch (error: any) {
@@ -39,7 +39,17 @@ async function list(path: string) {
   return baseResponse;
 }
 
-async function getById(path: string, id: string) {
+export async function get(path: string, headers?: AxiosHeaders) {
+  try {
+    baseResponse.data = await client.get(path, { headers });
+  } catch (error: any) {
+    baseResponse.error = performError(error);
+    baseResponse.response = error.response;
+  }
+  return baseResponse;
+}
+
+export async function getById(path: string, id: string) {
   try {
     baseResponse.data = await client.get(`${path}/${id}`);
   } catch (error: any) {
@@ -49,7 +59,7 @@ async function getById(path: string, id: string) {
   return baseResponse;
 }
 
-async function add(path: string, data?: any, headers?: AxiosHeaders) {
+export async function update(path: string, data?: any, headers?: AxiosHeaders) {
   try {
     baseResponse.data = await client.put(path, data, { headers });
   } catch (error: any) {
@@ -59,4 +69,12 @@ async function add(path: string, data?: any, headers?: AxiosHeaders) {
   return baseResponse;
 }
 
-export { setCommonAuthHeader, list, getById, add };
+export async function add(path: string, data?: any, headers?: AxiosHeaders) {
+  try {
+    baseResponse.data = await client.post(path, data, { headers });
+  } catch (error: any) {
+    baseResponse.error = performError(error);
+    baseResponse.response = error.response;
+  }
+  return baseResponse;
+}

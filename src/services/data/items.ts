@@ -1,12 +1,14 @@
 import { ErrorCodes } from '@/types/ApiClientType';
-import { emptyInventory, Inventory, Item } from '@/types/ItemType';
-import { add, getById, list } from '@/services/api/client';
+import {
+  BoughtItem,
+  BoughtItemSaveFields,
+  emptyInventory,
+  Inventory,
+  Item,
+} from '@/types/ItemType';
+import { update, getById, list } from '@/services/api/client';
 
-// TODO: remove mock data
-
-export const USER_BOUGHT_DATA = 'user_bought_data';
-
-function normalizeItem(item: Item): Item {
+export function normalizeItem(item: Item): Item {
   return {
     ...item,
     imageSrc: `${process.env.PUBLIC_URL}/images/${item.imageSrc}`,
@@ -37,20 +39,26 @@ export async function getShopData(): Promise<Inventory[]> {
   return [emptyInventory];
 }
 
-export function getItemById(id: string) {
-  return getById('shop-items', id).then((response) => normalizeItem(response.data?.data));
+export async function getItemById(id: string) {
+  const response = await getById('shop-items', id);
+  return normalizeItem(response.data?.data);
 }
 
-export function getBoughtData(): (Item)[] {
-  const boughtData = localStorage.getItem(USER_BOUGHT_DATA);
-  return boughtData ? JSON.parse(boughtData) : [];
+export async function getBoughtData(): Promise<BoughtItem[]> {
+  const response = await list('bought-items');
+
+  return response.data?.data;
 }
 
-export async function buyItem(item: Item) {
-  const response = await add(`shop-items/${item._id}/buy`, item);
+export async function buyItem(id: string, item: BoughtItemSaveFields) {
+  const response = await update(`shop-items/${id}/buy`, item);
 
-  if (response.error && response.response?.status === 401) {
-    throw Error(ErrorCodes.UnAuthorized);
+  if (response.error) {
+    if (response.response?.status === 401) {
+      throw Error(ErrorCodes.UnAuthorized);
+    } else {
+      throw Error(response.response?.data?.error?.message);
+    }
   }
 
   return response.data;

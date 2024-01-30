@@ -1,15 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { CURRENT_BALANCE_KEY } from '@/services/tokenomics';
 import { ModalType } from '@/types/ModalType';
+import { UserType } from '@/types/UserType';
 
 type GlobalSliceState = {
+  user: UserType | null;
   userCurrentBalance: number;
+  userWorkingBalance: number;
   modal: ModalType,
 };
 
 const initialState: GlobalSliceState = {
-  userCurrentBalance: Number(localStorage.getItem(CURRENT_BALANCE_KEY)) || 0,
+  user: null,
+  userCurrentBalance: 0,
+  userWorkingBalance: 0,
   modal: {
     show: false,
   },
@@ -19,11 +23,16 @@ export const globalSlice = createSlice({
   name: 'global',
   initialState,
   reducers: {
+    setUser(state, { payload }: PayloadAction<UserType | null>) {
+      state.user = payload;
+      state.userCurrentBalance = payload?.balance || 0;
+      state.userWorkingBalance = payload?.workingBalance || 0;
+    },
     setUserCurrentBalance(state, { payload }: PayloadAction<number>) {
       state.userCurrentBalance = payload;
     },
-    addProfitToBalanceLocal(state, { payload }: PayloadAction<number>) {
-      state.userCurrentBalance = state.userCurrentBalance + payload;
+    setUserWorkingBalance(state, { payload }: PayloadAction<number>) {
+      state.userWorkingBalance = payload;
     },
     hideModal(state) {
       state.modal = { show: false };
@@ -35,8 +44,9 @@ export const globalSlice = createSlice({
 });
 
 export const {
+  setUser,
   setUserCurrentBalance,
-  addProfitToBalanceLocal,
+  setUserWorkingBalance,
   hideModal,
   showModal,
 } = globalSlice.actions;

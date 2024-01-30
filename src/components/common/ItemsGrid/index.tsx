@@ -1,9 +1,9 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { Col, Row, RowProps } from 'react-bootstrap';
 
 import { Item } from '@/types/ItemType';
 import MiniCard from '@/components/common/MiniCard/MiniCard';
-import { Col, Row, RowProps } from 'react-bootstrap';
 
 type Props = {
   items: Item[];

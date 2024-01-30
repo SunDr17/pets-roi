@@ -4,9 +4,8 @@ import { InputGroup, Form, Stack } from 'react-bootstrap';
 
 import config from '@/config';
 import { useAppDispatch } from '@/store/hooks';
-import { addProfitToBalanceLocal, hideModal } from '@/store/global-slice';
-
-import { topUpBalance } from '@/services/tokenomics';
+import { hideModal } from '@/store/global-slice';
+import useTopUpBalance from '@/hooks/tokenomics/useTopUpBalance';
 import { EXCHANGE_RATES, convertCurrencies } from '@/services/currencies';
 import SendTransactionButton from '@/components/common/web3/SendTransactionButton';
 
@@ -26,6 +25,7 @@ const createMask = (currency: string): RegExp => {
 const TopUpForm = ({ primaryCurrency, secondaryCurrency }: Props) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+  const topUpBalance = useTopUpBalance();
 
   const [inputValues, setInputValues] = useState({
     primary: '',
@@ -64,12 +64,11 @@ const TopUpForm = ({ primaryCurrency, secondaryCurrency }: Props) => {
     });
   };
 
-  const onConfirmTopUp = () => {
+  const onConfirmTopUp = async () => {
     const sum = parseFloat(inputValues.primary);
     if (!sum) return null;
 
-    topUpBalance(sum);
-    dispatch(addProfitToBalanceLocal(sum));
+    await topUpBalance(sum);
 
     setInputValues({
       primary: '',
