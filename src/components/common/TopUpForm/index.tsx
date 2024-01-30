@@ -28,8 +28,8 @@ const TopUpForm = ({ primaryCurrency, secondaryCurrency }: Props) => {
   const dispatch = useAppDispatch();
 
   const [inputValues, setInputValues] = useState({
-    primary: '0',
-    secondary: '0',
+    primary: '',
+    secondary: '',
   });
 
   const primaryInputMask = useMemo(() => {
@@ -72,8 +72,8 @@ const TopUpForm = ({ primaryCurrency, secondaryCurrency }: Props) => {
     dispatch(addProfitToBalanceLocal(sum));
 
     setInputValues({
-      primary: '0',
-      secondary: '0',
+      primary: '',
+      secondary: '',
     });
 
     dispatch(hideModal());
