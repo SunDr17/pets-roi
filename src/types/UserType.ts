@@ -7,4 +7,5 @@ export interface UserType {
   walletAddress: string;
   balance: number;
   workingBalance: number;
+  cycleStartTime: Date | null;
 }

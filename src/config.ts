@@ -1,3 +1,4 @@
+// TODO: move config to BE
 const config = {
   percentsForBoughtBalance: {
     0: 2,

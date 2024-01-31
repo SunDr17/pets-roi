@@ -4,15 +4,11 @@ import Container from 'react-bootstrap/Container';
 
 import config from '@/config';
 import { useAppSelector } from '@/store/hooks';
-import { selectUserWorkingBalance } from '@/store/selectors';
+import { selectUser, selectUserWorkingBalance } from '@/store/selectors';
 import useInterval from '@/hooks/useInterval';
 import useFinishCycle from '@/hooks/tokenomics/useFinishCycle';
 import useGetCurrentProfitPercent from '@/hooks/tokenomics/useGetCurrentProfitPercent';
 import useCalculateCurrentProfit from '@/hooks/tokenomics/useCalculateCurrentProfit';
-import {
-  getCycleStartTime,
-  setCycleStartTime,
-} from '@/services/tokenomics';
 import Countdown from '@/components/common/Countdown';
 import FinishCycleModalButton from '@/components/pages/Home/FinishCycleModalButton';
 
@@ -22,10 +18,13 @@ export default function TokenomicInfo() {
   const { t } = useTranslation();
 
   const finishCycle = useFinishCycle();
+  const currentUser = useAppSelector(selectUser)!;
   const currentProfitPercent = useGetCurrentProfitPercent();
   const calculateCurrentProfit = useCalculateCurrentProfit();
   const boughtAmount = useAppSelector(selectUserWorkingBalance);
-  const cycleStartTime = getCycleStartTime();
+  const cycleStartTime = currentUser.cycleStartTime
+    ? new Date(currentUser.cycleStartTime).getTime()
+    : 0;
 
   const [nextCycleTimer, setNextCycleTimer] = useState(cycleStartTime + config.cycleDuration);
   const [currentProfit, setCurrentProfit] = useState(calculateCurrentProfit());
@@ -37,10 +36,8 @@ export default function TokenomicInfo() {
   const onFinishCycleButtonClick = async () => {
     await finishCycle(currentProfit);
 
-    // TODO: move cycleStartTime to BE
     setNextCycleTimer(new Date().getTime() + config.cycleDuration);
     setCurrentProfit(0);
-    setCycleStartTime(new Date().getTime());
   };
 
   return (

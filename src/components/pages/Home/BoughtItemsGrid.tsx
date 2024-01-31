@@ -5,6 +5,8 @@ import { LinkContainer } from 'react-router-bootstrap';
 import Button from 'react-bootstrap/Button';
 
 import { Item } from '@/types/ItemType';
+import { useAppSelector } from '@/store/hooks';
+import { selectIsUserChanged } from '@/store/selectors';
 import { getBoughtData, normalizeItem } from '@/services/data/items';
 import Spinner from '@/components/common/Spinner';
 import ItemsGrid from '@/components/common/ItemsGrid';
@@ -13,9 +15,9 @@ export default function BoughtItemsGrid() {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
   const [items, setItems] = useState<Item[]>([]);
+  const isUserChanged = useAppSelector(selectIsUserChanged);
 
   useEffect(() => {
-    // TODO: getBoughtData when changing user
     getBoughtData().then((items) => {
       const normalizedItems = items.map((it) => {
         return normalizeItem({
@@ -26,7 +28,7 @@ export default function BoughtItemsGrid() {
       setItems(normalizedItems);
       setLoading(false);
     });
-  }, []);
+  }, [isUserChanged]);
 
   return !loading ? (
     <ItemsGrid
