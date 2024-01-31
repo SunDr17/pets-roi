@@ -4,6 +4,7 @@ import { RootState } from '.';
 
 const global = (state: RootState) => state.global;
 
+export const selectConfig = createSelector(global, (state) => state.config);
 export const selectUser = createSelector(global, (state) => state.user);
 export const selectIsUserChanged = createSelector(global, (state) => state.isUserChangedToggler);
 export const selectUserCurrentBalance = createSelector(

@@ -10,24 +10,24 @@ export const CURRENCIES = {
   PRIMARY_CURRENCY,
 };
 
-interface currencyPrice {
+interface CurrencyPrice {
   [key: string]: number,
 }
 
-interface exchangeRates {
-  [key: string]: currencyPrice,
+interface ExchangeRates {
+  [key: string]: CurrencyPrice,
 }
 
-type currencyAmount = {
+type CurrencyAmount = {
   amount: number;
   currency: string;
 }
 
 const createExchangeRates = () => {
-  let exchangeRates = {} as exchangeRates;
+  let exchangeRates = {} as ExchangeRates;
 
   exchangeRates[BNB] = {
-    [PRIMARY_CURRENCY]: config.currencyInBNB,
+    [PRIMARY_CURRENCY]: config.currencyInBNB, // TODO: get config from redux
   };
 
   exchangeRates[PRIMARY_CURRENCY] = {
@@ -39,7 +39,7 @@ const createExchangeRates = () => {
 
 export const EXCHANGE_RATES = createExchangeRates();
 
-export function convertCurrencies(from: string, to: string, amount: number): currencyAmount {
+export function convertCurrencies(from: string, to: string, amount: number): CurrencyAmount {
   return {
     amount: Number((amount * EXCHANGE_RATES[from][to]).toFixed(config.decimalPrecision[to])) || 0,
     currency: to,

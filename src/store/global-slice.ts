@@ -2,8 +2,10 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { ModalType } from '@/types/ModalType';
 import { UserType } from '@/types/UserType';
+import { ConfigType } from '@/types/ConfigType';
 
 type GlobalSliceState = {
+  config: ConfigType;
   user: UserType | null;
   userCurrentBalance: number;
   userWorkingBalance: number;
@@ -12,6 +14,11 @@ type GlobalSliceState = {
 };
 
 const initialState: GlobalSliceState = {
+  config: {
+    percentsForBoughtBalance: { '0': 0 },
+    currencyInBNB: 0,
+    cycleDuration: 0,
+  },
   user: null,
   userCurrentBalance: 0,
   userWorkingBalance: 0,
@@ -25,6 +32,11 @@ export const globalSlice = createSlice({
   name: 'global',
   initialState,
   reducers: {
+    setConfig(state, { payload }: PayloadAction<ConfigType | null>) {
+      if (payload) {
+        state.config = payload;
+      }
+    },
     setUser(state, { payload }: PayloadAction<UserType | null>) {
       state.user = payload;
       state.userCurrentBalance = payload?.balance || 0;
@@ -49,6 +61,7 @@ export const globalSlice = createSlice({
 });
 
 export const {
+  setConfig,
   setUser,
   setUserCurrentBalance,
   setUserWorkingBalance,

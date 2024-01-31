@@ -2,12 +2,14 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import Table from 'react-bootstrap/Table';
 
-import config from '@/config';
+import { useAppSelector } from '@/store/hooks';
+import { selectConfig } from '@/store/selectors';
 import { getWordInflection } from '@/utils/string';
 import { CURRENCIES, EXCHANGE_RATES } from '@/services/currencies';
 
 export default function Tokenomics() {
   const { t } = useTranslation();
+  const config = useAppSelector(selectConfig);
   const cycleDuration = config.cycleDuration / (60 * 60 * 1000);
 
   return (

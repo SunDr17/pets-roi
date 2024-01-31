@@ -1,6 +1,5 @@
-import config from '@/config';
-import { selectUser, selectUserWorkingBalance } from '@/store/selectors';
 import { useAppSelector } from '@/store/hooks';
+import { selectConfig, selectUser, selectUserWorkingBalance } from '@/store/selectors';
 import useGetCurrentProfitPercent from '@/hooks/tokenomics/useGetCurrentProfitPercent';
 
 export default function useCalculateCurrentProfit() {
@@ -9,6 +8,7 @@ export default function useCalculateCurrentProfit() {
   // but profit should be calculated with old balance all time it was,
   // and start calculate profit with new balance only from time when it was changed
   const currentUser = useAppSelector(selectUser)!;
+  const cycleDuration = useAppSelector(selectConfig).cycleDuration;
   const cycleStartTime = currentUser?.cycleStartTime
     ? new Date(currentUser?.cycleStartTime).getTime()
     : 0;
@@ -17,10 +17,10 @@ export default function useCalculateCurrentProfit() {
 
   return function () {
     const timerAfterPrevCycleStarted = Date.now() - cycleStartTime;
-    const cycleTimer = timerAfterPrevCycleStarted < config.cycleDuration
+    const cycleTimer = timerAfterPrevCycleStarted < cycleDuration
       ? timerAfterPrevCycleStarted
-      : config.cycleDuration;
+      : cycleDuration;
 
-    return cycleTimer * ((workingBalance / 100 * currentProfitPercent) / config.cycleDuration);
+    return cycleTimer * ((workingBalance / 100 * currentProfitPercent) / cycleDuration);
   }
 }
