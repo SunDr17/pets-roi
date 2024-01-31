@@ -16,7 +16,7 @@ export default function useOnAccountChange() {
         registerUser(data.address).then((user) => {
           if (user) {
             dispatch(setUser(user));
-            dispatch(toggleIsUserChanged(true));
+            dispatch(toggleIsUserChanged());
           }
         });
       }

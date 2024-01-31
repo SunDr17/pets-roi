@@ -7,7 +7,7 @@ type GlobalSliceState = {
   user: UserType | null;
   userCurrentBalance: number;
   userWorkingBalance: number;
-  isUserChanged: boolean;
+  isUserChangedToggler: boolean;
   modal: ModalType;
 };
 
@@ -15,7 +15,7 @@ const initialState: GlobalSliceState = {
   user: null,
   userCurrentBalance: 0,
   userWorkingBalance: 0,
-  isUserChanged: false,
+  isUserChangedToggler: false,
   modal: {
     show: false,
   },
@@ -42,8 +42,8 @@ export const globalSlice = createSlice({
     showModal(state, { payload }: PayloadAction<ModalType>) {
       Object.assign(state.modal, { ...payload, show: true });
     },
-    toggleIsUserChanged(state, { payload }: PayloadAction<boolean>) {
-      state.isUserChanged = payload;
+    toggleIsUserChanged(state) {
+      state.isUserChangedToggler = !state.isUserChangedToggler;
     },
   },
 });

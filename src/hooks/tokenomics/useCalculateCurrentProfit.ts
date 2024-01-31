@@ -9,8 +9,8 @@ export default function useCalculateCurrentProfit() {
   // but profit should be calculated with old balance all time it was,
   // and start calculate profit with new balance only from time when it was changed
   const currentUser = useAppSelector(selectUser)!;
-  const cycleStartTime = currentUser.cycleStartTime
-    ? new Date(currentUser.cycleStartTime).getTime()
+  const cycleStartTime = currentUser?.cycleStartTime
+    ? new Date(currentUser?.cycleStartTime).getTime()
     : 0;
   const workingBalance = useAppSelector(selectUserWorkingBalance);
   const currentProfitPercent = useGetCurrentProfitPercent();

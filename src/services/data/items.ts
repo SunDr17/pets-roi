@@ -47,6 +47,8 @@ export async function getItemById(id: string) {
 export async function getBoughtData(): Promise<BoughtItem[]> {
   const response = await list('bought-items');
 
+  if (response.error) return [];
+
   return response.data?.data;
 }
 

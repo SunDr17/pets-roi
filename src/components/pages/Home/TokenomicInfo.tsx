@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Container from 'react-bootstrap/Container';
 
@@ -18,16 +18,20 @@ export default function TokenomicInfo() {
   const { t } = useTranslation();
 
   const finishCycle = useFinishCycle();
-  const currentUser = useAppSelector(selectUser)!;
+  const currentUser = useAppSelector(selectUser);
   const currentProfitPercent = useGetCurrentProfitPercent();
   const calculateCurrentProfit = useCalculateCurrentProfit();
   const boughtAmount = useAppSelector(selectUserWorkingBalance);
-  const cycleStartTime = currentUser.cycleStartTime
-    ? new Date(currentUser.cycleStartTime).getTime()
+  const cycleStartTime = currentUser?.cycleStartTime
+    ? new Date(currentUser?.cycleStartTime).getTime()
     : 0;
 
   const [nextCycleTimer, setNextCycleTimer] = useState(cycleStartTime + config.cycleDuration);
   const [currentProfit, setCurrentProfit] = useState(calculateCurrentProfit());
+
+  useEffect(() => {
+    setNextCycleTimer(cycleStartTime + config.cycleDuration);
+  }, [currentUser]);
 
   useInterval(() => {
     setCurrentProfit(calculateCurrentProfit());

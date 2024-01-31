@@ -5,7 +5,7 @@ import { RootState } from '.';
 const global = (state: RootState) => state.global;
 
 export const selectUser = createSelector(global, (state) => state.user);
-export const selectIsUserChanged = createSelector(global, (state) => state.isUserChanged);
+export const selectIsUserChanged = createSelector(global, (state) => state.isUserChangedToggler);
 export const selectUserCurrentBalance = createSelector(
   global,
   (state) => Number(Number(state.userCurrentBalance).toFixed(2)),

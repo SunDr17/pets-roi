@@ -13,12 +13,12 @@ const config = {
     140000: 2.9,
     150000: 3,
   } as { [index: string]: number },
-  currencyInBNB: 100000,
+  currencyInBNB: 1000000000,
   decimalPrecision: {
     primary_currency: 2,
     bnb: 8,
   } as { [index: string]: number },
-  cycleDuration: 24 * 60 * 60 * 1000,
+  cycleDuration: 3 * 60 * 1000,
   socialLinks: {
     'twitter-x': 'https://twitter.com/',
     telegram: 'https://t.me/CrypTime_Channel',

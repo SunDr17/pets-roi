@@ -7,7 +7,7 @@ const client = axios.create({
   baseURL: `${process.env.REACT_APP_API_BASE_PATH}/api/`,
 });
 
-const baseResponse: ApiResponse = {
+const BaseResponse: ApiResponse = {
   data: null,
   error: null,
   response: null,
@@ -30,6 +30,7 @@ export function setCommonAuthHeader() {
 }
 
 export async function list(path: string) {
+  const baseResponse = { ...BaseResponse };
   try {
     baseResponse.data = await client.get(path);
   } catch (error: any) {
@@ -40,6 +41,7 @@ export async function list(path: string) {
 }
 
 export async function get(path: string, headers?: AxiosHeaders) {
+  const baseResponse = { ...BaseResponse };
   try {
     baseResponse.data = await client.get(path, { headers });
   } catch (error: any) {
@@ -50,6 +52,7 @@ export async function get(path: string, headers?: AxiosHeaders) {
 }
 
 export async function getById(path: string, id: string) {
+  const baseResponse = { ...BaseResponse };
   try {
     baseResponse.data = await client.get(`${path}/${id}`);
   } catch (error: any) {
@@ -60,6 +63,7 @@ export async function getById(path: string, id: string) {
 }
 
 export async function update(path: string, data?: any, headers?: AxiosHeaders) {
+  const baseResponse = { ...BaseResponse };
   try {
     baseResponse.data = await client.put(path, data, { headers });
   } catch (error: any) {
@@ -70,6 +74,7 @@ export async function update(path: string, data?: any, headers?: AxiosHeaders) {
 }
 
 export async function add(path: string, data?: any, headers?: AxiosHeaders) {
+  const baseResponse = { ...BaseResponse };
   try {
     baseResponse.data = await client.post(path, data, { headers });
   } catch (error: any) {
