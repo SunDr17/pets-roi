@@ -4,17 +4,21 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
+import { useAppSelector } from '@/store/hooks';
+import { selectConfig } from '@/store/selectors';
 import {
   getReferralLink,
   getReferralBalance,
   getReferralPartnersQuantity,
 } from '@/services/data/referral';
-import { convertCurrencies, CURRENCIES } from '@/services/currencies';
+import { CURRENCIES, exchangeRates } from '@/services/currencies';
 import SendTransactionButton from '@/components/common/web3/SendTransactionButton';
 
 export default function ReferralProgram() {
   const { t } = useTranslation();
   const [isCopied, setIsCopied] = useState(false);
+  const currencyInBNB = useAppSelector(selectConfig).currencyInBNB;
+  const { convertCurrencies } = exchangeRates(currencyInBNB);
   const referralLink = getReferralLink();
   const referralBalance = getReferralBalance();
   const referralBalanceInBnb = convertCurrencies(

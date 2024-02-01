@@ -3,10 +3,11 @@ import { useTranslation } from 'react-i18next';
 import { InputGroup, Form, Stack } from 'react-bootstrap';
 
 import config from '@/config';
-import { useAppDispatch } from '@/store/hooks';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { selectConfig } from '@/store/selectors';
 import { hideModal } from '@/store/global-slice';
 import useTopUpBalance from '@/hooks/tokenomics/useTopUpBalance';
-import { EXCHANGE_RATES, convertCurrencies } from '@/services/currencies';
+import { exchangeRates } from '@/services/currencies';
 import SendTransactionButton from '@/components/common/web3/SendTransactionButton';
 
 type Props = {
@@ -26,6 +27,8 @@ const TopUpForm = ({ primaryCurrency, secondaryCurrency }: Props) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const topUpBalance = useTopUpBalance();
+  const currencyInBNB = useAppSelector(selectConfig).currencyInBNB;
+  const { EXCHANGE_RATES, convertCurrencies } = exchangeRates(currencyInBNB);
 
   const [inputValues, setInputValues] = useState({
     primary: '',

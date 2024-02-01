@@ -23,25 +23,29 @@ type CurrencyAmount = {
   currency: string;
 }
 
-const createExchangeRates = () => {
-  let exchangeRates = {} as ExchangeRates;
+export function exchangeRates(currencyInBNB: number) {
+  const createExchangeRates = () => {
+    let exchangeRates = {} as ExchangeRates;
 
-  exchangeRates[BNB] = {
-    [PRIMARY_CURRENCY]: config.currencyInBNB, // TODO: get config from redux
+    exchangeRates[BNB] = {
+      [PRIMARY_CURRENCY]: currencyInBNB,
+    };
+
+    exchangeRates[PRIMARY_CURRENCY] = {
+      [BNB]: 1 / exchangeRates[BNB][PRIMARY_CURRENCY],
+    };
+
+    return exchangeRates;
   };
 
-  exchangeRates[PRIMARY_CURRENCY] = {
-    [BNB]: 1 / exchangeRates[BNB][PRIMARY_CURRENCY],
-  };
+  const EXCHANGE_RATES = createExchangeRates();
 
-  return exchangeRates;
-};
+  function convertCurrencies(from: string, to: string, amount: number): CurrencyAmount {
+    return {
+      amount: Number((amount * EXCHANGE_RATES[from][to]).toFixed(config.decimalPrecision[to])) || 0,
+      currency: to,
+    };
+  }
 
-export const EXCHANGE_RATES = createExchangeRates();
-
-export function convertCurrencies(from: string, to: string, amount: number): CurrencyAmount {
-  return {
-    amount: Number((amount * EXCHANGE_RATES[from][to]).toFixed(config.decimalPrecision[to])) || 0,
-    currency: to,
-  };
+  return { EXCHANGE_RATES, convertCurrencies };
 }

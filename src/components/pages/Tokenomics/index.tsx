@@ -5,12 +5,13 @@ import Table from 'react-bootstrap/Table';
 import { useAppSelector } from '@/store/hooks';
 import { selectConfig } from '@/store/selectors';
 import { getWordInflection } from '@/utils/string';
-import { CURRENCIES, EXCHANGE_RATES } from '@/services/currencies';
+import { CURRENCIES, exchangeRates } from '@/services/currencies';
 
 export default function Tokenomics() {
   const { t } = useTranslation();
   const config = useAppSelector(selectConfig);
   const cycleDuration = config.cycleDuration / (60 * 60 * 1000);
+  const { EXCHANGE_RATES } = exchangeRates(config.currencyInBNB);
 
   return (
     <div className="text-center align-items-center justify-content-center">
