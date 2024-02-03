@@ -33,7 +33,7 @@ export default function MiniCard({ item }: { item: Item }) {
           }
         </div>
         <Card.Body className="d-flex flex-grow-0 flex-column justify-content-end align-items-center">
-          <Card.Title>{item.name}</Card.Title>
+          <Card.Title>{t(item.name)}</Card.Title>
           <Card.Text>
             {t('miniCard.price', { price: item.price })}
           </Card.Text>
