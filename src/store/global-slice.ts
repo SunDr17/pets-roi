@@ -3,10 +3,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ModalType } from '@/types/ModalType';
 import { UserType } from '@/types/UserType';
 import { ConfigType } from '@/types/ConfigType';
+import { UserProfitType } from '@/types/UserProfitType';
 
 type GlobalSliceState = {
   config: ConfigType;
   user: UserType | null;
+  userProfitData: UserProfitType | null;
   userCurrentBalance: number;
   userWorkingBalance: number;
   isUserChangedToggler: boolean;
@@ -18,8 +20,15 @@ const initialState: GlobalSliceState = {
     percentsForBoughtBalance: { '0': 0 },
     currencyInBNB: 0,
     cycleDuration: 0,
+    currentProfitPercent: 0,
   },
   user: null,
+  userProfitData: {
+    cycleStartDate: 0,
+    boughtDate: 0,
+    sum: 0,
+    workingBalance: 0,
+  },
   userCurrentBalance: 0,
   userWorkingBalance: 0,
   isUserChangedToggler: false,
@@ -42,6 +51,9 @@ export const globalSlice = createSlice({
       state.userCurrentBalance = payload?.balance || 0;
       state.userWorkingBalance = payload?.workingBalance || 0;
     },
+    setUserProfitData(state, { payload }: PayloadAction<UserProfitType>) {
+      state.userProfitData = payload;
+    },
     setUserCurrentBalance(state, { payload }: PayloadAction<number>) {
       state.userCurrentBalance = payload;
     },
@@ -63,6 +75,7 @@ export const globalSlice = createSlice({
 export const {
   setConfig,
   setUser,
+  setUserProfitData,
   setUserCurrentBalance,
   setUserWorkingBalance,
   toggleIsUserChanged,

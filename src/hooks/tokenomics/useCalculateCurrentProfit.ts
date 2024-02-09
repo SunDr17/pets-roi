@@ -1,26 +1,19 @@
 import { useAppSelector } from '@/store/hooks';
-import { selectConfig, selectUser, selectUserWorkingBalance } from '@/store/selectors';
-import useGetCurrentProfitPercent from '@/hooks/tokenomics/useGetCurrentProfitPercent';
+import { selectConfig, selectUserProfitData } from '@/store/selectors';
 
 export default function useCalculateCurrentProfit() {
-  // TODO: move profit calculation to BE
-  // TODO: fix bug: when current balance changes, current profit calculate according new value
-  // but profit should be calculated with old balance all time it was,
-  // and start calculate profit with new balance only from time when it was changed
-  const currentUser = useAppSelector(selectUser)!;
-  const cycleDuration = useAppSelector(selectConfig).cycleDuration;
-  const cycleStartTime = currentUser?.cycleStartTime
-    ? new Date(currentUser?.cycleStartTime).getTime()
-    : 0;
-  const workingBalance = useAppSelector(selectUserWorkingBalance);
-  const currentProfitPercent = useGetCurrentProfitPercent();
+  const config = useAppSelector(selectConfig);
+  const userProfit = useAppSelector(selectUserProfitData);
 
   return function () {
-    const timerAfterPrevCycleStarted = Date.now() - cycleStartTime;
-    const cycleTimer = timerAfterPrevCycleStarted < cycleDuration
-      ? timerAfterPrevCycleStarted
-      : cycleDuration;
+    if (!userProfit) return 0;
 
-    return cycleTimer * ((workingBalance / 100 * currentProfitPercent) / cycleDuration);
+    const timeCurProfit = new Date().getTime() - userProfit.boughtDate;
+    const timeAvailableProfit = config.cycleDuration - (userProfit.boughtDate - userProfit.cycleStartDate);
+    const timerBetweenProfitUpdates = Math.min(timeCurProfit, timeAvailableProfit);
+
+    return userProfit.sum + timerBetweenProfitUpdates * (
+      (userProfit.workingBalance / 100 * config.currentProfitPercent) / config.cycleDuration
+    );
   }
 }

@@ -4,6 +4,7 @@ import { BoughtItemSaveFields, Item } from '@/types/ItemType';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { setUser } from '@/store/global-slice';
 import { selectUserCurrentBalance } from '@/store/selectors';
+import useUpdateConfig from '@/hooks/useUpdateConfig';
 import { buyItem } from '@/services/data/items';
 import { getCurrentUser } from '@/services/user';
 
@@ -11,6 +12,7 @@ export default function useBuyItem() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const currentUserBalance = useAppSelector(selectUserCurrentBalance);
+  const updateConfig = useUpdateConfig();
 
   return async (itemToBuy: BoughtItemSaveFields, item: Item) => {
     try {
@@ -21,6 +23,8 @@ export default function useBuyItem() {
         if (user) {
           dispatch(setUser(user));
         }
+
+        await updateConfig();
 
         navigate('/');
       } else {
